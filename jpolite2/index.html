@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>JPolite V2</title>
+</head>
+<body>
+<div id="header">
+	<div id="logo"></div>
+	<div id="title">A Lightweight Portal Framework based on jQuery</div>
+	<div id="header_tabs">
+	<ul>
+		<li id="t1">About</li>
+		<li id="t2">Components</li>
+		<li id="t3">Layout</li>
+		<li id="t4">Controls</li>
+		<li id="t5">Extras</li>
+		<li id="t7">RSS Reader</li>
+		<li id="t6">Download</li>
+	</ul>
+	</div>
+	<div id="info_bar"><div id="loading"><img src="g/loading.gif"></div>
+		<span class="right">
+			<img id="expd" src="g/s.gif" alt="Expand All Modules"/>
+			<img id="clps" src="g/s.gif" alt="Collapse All"/>
+		</span>
+		<span class="hint right">Adjust module layout</span>
+	</div>
+</div>
+
+<div id="helper"></div>
+<table id="main_table">
+<tr><td style="position:relative">
+<div id="main">
+	<div id="c1" class="main_containers"></div>
+	<div id="c2" class="main_containers"></div>
+	<div id="c3" class="main_containers"></div>
+</div>
+</td></tr></table>
+
+<div id="footer">
+<div id="footer_bar"><a href="http://trilancer.wordpress.com/">Trilancer Blog</a> | <a href="http://www.jquery.com">About jQuery</a> | <a href="http://www.netvibes.com">About Netvibes</a> | <a href="http://jquery.com/demo/thickbox/">About Thickbox</a></div>
+Copyright 2009 (C) Trilancer.com
+</div>
+
+<!-- A hidden module template is carried within the page, which can be modified easily -->
+<div id="module_template" class="module" style="display:none">
+	<div class="moduleFrame">
+		<div class='moduleHeader'>
+			<span class="moduleIcon"><img alt="icon" src="g/icon.gif"/></span>
+			<div class='moduleTitle'></div>
+			<div class='moduleActions'>
+				<img src='g/s.gif' alt="Refresh" class="action_refresh"/>
+				<img src='g/s.gif' alt="Collapse" class="action_min"/>
+				<img src='g/s.gif' alt="Expand" class="action_max"/>
+				<img src='g/s.gif' alt="Close" class="action_close"/>
+			</div>
+		</div>
+		<div class='moduleContent'>
+			<img src="g/loading.gif" alt="Loading..."/> Loading...
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jpolite.core.js"></script>
+</body>
+</html>

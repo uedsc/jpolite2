@@ -1,18 +1,18 @@
-function jPolite() {
-	this._Header = $("#header");
-	this._Footer = $("#footer");
-	this._Tabs = $("#header_tabs");
-	this._Main = $("#main");
-	this._Containers = $(".main_containers");
-	this._Modules = $(".module");
+var jPolite = {
+	_Header: $("#header"),
+	_Footer: $("#footer"),
+	_Tabs: $("#header_tabs"),
+	_Main: $("#main"),
+	_Containers: $(".main_containers"),
+	_Modules: $(".module"),
 
-	function changeLayout(){
+	changeLayout: function () {
 		//Apply on _Main and/or _Containers
-	};
+	},
 
-	this.handleMessage = function(m) {
+	handleMessage: function(m) {
 		//Process message from server side
-	};
+	}
 };
 
 /*
@@ -47,13 +47,13 @@ $.fn.extend({
  * with Embedded RESTful resource discovery mechanism
  * Currently only support JSON formatted data
  */
-function XDO() {
-	this.XDOS = {};
-	this.UIOS = {};
+var XDO = {
+	XDOS: {},
+	UIOS: {},
 
-	this.handleMessage = function(m) {
+	handleMessage: function(m) {
 		//Process message from server side
-	};
+	}
 };
 
 /*

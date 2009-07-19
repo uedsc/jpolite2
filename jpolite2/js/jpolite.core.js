@@ -1,13 +1,59 @@
 var jPolite = {
-	_Header: $("#header"),
-	_Footer: $("#footer"),
-	_Tabs: $("#header_tabs"),
-	_Main: $("#main"),
-	_Containers: $(".main_containers"),
-	_Modules: $(".module"),
+	Header: $("#header"),
+	Footer: $("#footer"),
+	Tabs: {
+		init: function(){
+			this.tabs = {};
+			var t = this.tabs;
+			$("#header_tabs li").each(function(){
+				this.modules = {};
+				t[this.id] = this;
+			}).click(function(){
+				$(".module:visible").hide();
+				jPolite.Tabs.ct = this;
+				$.each(this.modules, function(i,m){
+					$(m).show();
+				})
+			});
+		},
+		addStaticModule: function(m, tab_id){
+			this.tabs[tab_id].modules[m.id] = m;
+		}
+	},
+	Content: {
+		c1:$("#c1"),
+		c2:$("#c2"),
+		c3:$("#c3"),
+		setLayout: function (s) {
+			this.c1.css(s.c1);
+			this.c2.css(s.c2);
+			this.c3.css(s.c3);
+		},
+	},
+	Modules: {
+		loadStatic: function(){
+			$(".module").each(function(){
+				var p = this.id.split("#");	//m101#t1
+				$.extend(this, {
+					id: p[0],
+					tab: p[1],
+					//url: _modules[p[0]],
+					loaded: true
+				});
+				jPolite.Tabs.addStaticModule(this, p[1])
+			});
+		}
+	},
 
-	changeLayout: function () {
-		//Apply on _Main and/or _Containers
+	init: function(){
+		this.Header.extend({
+			haha: function(){alert(this.size())},
+			hoho: function(){alert(this.length)}
+		});
+		this.Tabs.init();
+		this.Modules.loadStatic();
+		delete this.Tabs.init;
+		delete jPolite.init;
 	},
 
 	handleMessage: function(m) {
@@ -79,4 +125,11 @@ function DOC(){
 	};
 };
 	
-$(function(){});
+$(function(){
+	jPolite.init();
+	jPolite.Content.setLayout({
+		c1:{width:'33%'},
+		c2:{width:'33%'},
+		c3:{width:'33%'}
+	});
+});

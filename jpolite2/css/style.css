@@ -1,0 +1,88 @@
+/*======================================
+      WELCOME TO THE STYLESHEET
+--------------------------------------      
+     Copyright Mike Crittenden
+      Author: Mike Crittenden
+======================================*/
+ 
+/**************************************\
+|------------COLOR SCHEME--------------|
+|--------------------------------------|
+- black		#000
+- white		#fff
+\**************************************/
+
+
+/**************************************/
+/*              GLOBALS               */
+/**************************************/
+body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
+.left  {float:left}
+.right {float:right}
+
+/**************************************/
+/*              HEADER                */
+/**************************************/
+#header {background:#0e4cbc url(../g/header.png) repeat-x}
+#logo {background:url(../g/logo.png) no-repeat; position:absolute; left:20px; top:10px; width:120px; height:50px}
+#title {padding-left:160px; color:#fff; font-size:1.5em; height:50px; line-height:50px; font-weight:bold; font-style:italic}
+#loading {display:none}
+
+#info_bar {clear:left; color:#aaa; background-color:#fefefe; border-bottom:1px solid #bbb; padding:4px 6px; overflow:hidden; height:1.2em}
+#info_bar span img {cursor:pointer}
+#info_bar .hint {display:none;padding-right:5px}
+#info_bar:hover .hint {display:inline}
+#expd {background:url(../g/expandAll.png);width:17px;height:16px;display:none}
+#clps {background:url(../g/collapseAll.png);width:17px;height:16px}
+
+
+/**************************************/
+/*             NAVIGATION             */
+/**************************************/
+#header_tabs {padding-left:160px; list-style-type:none; overflow:hidden; margin:0}
+#header_tabs li {padding:0 1em; float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#eee;
+				background:#6ae url(../g/header.png) 0 -8px; border-width:1px 1px 0 1px; border-style:solid; border-color:#acf #05b #000 #acf;
+				margin:0 3px;cursor:pointer; white-space:nowrap;}
+#header_tabs li:hover {color:#fff}				
+#header_tabs li.on {color:#07e; background:#f8f8f8 url(../g/tabon.gif) repeat-x;}
+
+
+/**************************************/
+/*            MAIN CONTENT            */
+/**************************************/
+#content {padding:3px; position:relative;overflow:hidden}
+.container {float:left;min-height:5em}
+
+/* Module Components */
+.module {background:#fff; border:3px solid #bbb; margin:8px 5px; display:none}
+.moduleFrame {border:1px solid #4E8EE2; overflow:hidden;}
+.moduleHeader {height:1.6em; background:#4E8EE2 url(../g/module-header.gif) repeat-x; border-left:1px solid #A7D0F6; border-top:1px solid #A7D0F6; color:#fff; cursor:move; overflow:hidden}
+.moduleIcon, .moduleTitle {line-height:1.4em; float:left; padding-left:2px; font-weight:bold}
+.moduleActions {display:none; float:right; height:16px; padding:0 2px}
+.moduleActions img {cursor:pointer;width:16px;height:16px}
+	.actionRefresh {background:url('../g/actionRefresh.png')}
+	.actionMax		{display:none;background:url('../g/actionMax.png')}
+	.actionMin		{background:url('../g/actionMin.png')}
+	.actionClose	{background:url('../g/actionClose.png')}
+.moduleHeader:hover .moduleActions {display:block}
+.moduleContent {border-top:1px solid #ddd; background:#fff url(g/nav_bg.gif) 0 -5px repeat-x; padding:5px}
+
+/* Simple Theme for Modules */
+.red .moduleHeader{background:#e24e61 url(g/module-orange.gif) repeat-x; border-color:#F6A7B8;}
+.red .moduleFrame{border-color:#E2584E;}
+.orange .moduleHeader{background:#E2584E url(g/module-red.gif) repeat-x; border-color:#F6A7A8}
+.orange .moduleFrame{border-color:#E2584E;}
+.yellow .moduleHeader{background:#E2904E url(g/module-yellow.gif) repeat-x; border-color:#F6C4A7;}
+.yellow .moduleFrame{border-color:#E2904E;}
+.green .moduleHeader{background:#66B161 url(g/module-green.gif) repeat-x; border-color:#ABCFA5}
+.green .moduleFrame{border-color:#66B161;}
+.white .moduleHeader{background:#9E9E9E url(g/module-white.gif) repeat-x; border-color:#D9D9D9}
+.white .moduleFrame{border-color:#9E9E9E;}
+
+/**************************************/
+/*               FOOTER               */
+/**************************************/
+#footer {position:fixed; color:#eee; bottom:0; width:100%; height:5em; background:#757495 url(../g/header.png) 0 16px; text-align:center}
+#footer_bar {color:#999; background-color:#fefefe; border-top:1px solid #ccc; border-bottom:1px solid #ccc; padding:4px 6px; height:1.2em; margin-bottom:10px}
+#footer_bar a {color:#999}
+#footer_bar a:hover {color:#333}

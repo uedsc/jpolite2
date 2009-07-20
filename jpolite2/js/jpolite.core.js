@@ -1,59 +1,77 @@
-var jPolite = {
+$.jpolite = {
 	Header: $("#header"),
 	Footer: $("#footer"),
 	Tabs: {
+		ct: false,				//Current selected tab id
+		ht: $("#header_tabs"),	//Header tab container
+		tabs: {},				//Hash for tabs, tabs[tab_x_id] == tab_x
 		init: function(){
-			this.tabs = {};
 			var t = this.tabs;
-			$("#header_tabs li").each(function(){
+			$("li", this.ht).each(function(){
 				this.modules = {};
 				t[this.id] = this;
 			}).click(function(){
-				$(".module:visible").hide();
-				jPolite.Tabs.ct = this;
-				$.each(this.modules, function(i,m){
-					$(m).show();
-				})
+				if ($(this).is(".on")) return;
+				$.jpolite.Tabs.switchTab(this);
 			});
 		},
+		switchTab: function(tab){
+			$(".module:visible").hide();
+			$(this.ct).removeClass("on");
+			this.ct = tab;
+			$(tab).addClass("on");
+			$.jpolite.Containers.setLayout();
+			$.each(tab.modules, function(i,m){
+				$(m).fadeIn();
+			});
+		},
+//		addNewTab: function(id, title) {
+//			var tab = $("<li id='" + id + "'>" + title + "</li>")
+//						.appendTo(this.ht)
+//						.click(function(){$.jpolite.Tabs.switchTab(this)})[0];
+//			this.tabs[id] = tab;
+//			tab.modules = {};
+//		},
 		addStaticModule: function(m, tab_id){
 			this.tabs[tab_id].modules[m.id] = m;
 		}
 	},
-	Content: {
+	Containers: {
 		c1:$("#c1"),
 		c2:$("#c2"),
 		c3:$("#c3"),
-		setLayout: function (s) {
-			this.c1.css(s.c1);
-			this.c2.css(s.c2);
-			this.c3.css(s.c3);
-		},
+		setLayout: function () {
+			var x = $.jpolite.Tabs.ct;
+			x = _columnLayout[x.id] || _columnLayout._default;
+			this.c1.css(x.c1);
+			this.c2.css(x.c2);
+			this.c3.css(x.c3);
+		}
 	},
 	Modules: {
 		loadStatic: function(){
 			$(".module").each(function(){
-				var p = this.id.split("#");	//m101#t1
+				var p = this.id.split(":");	//m101:t1
 				$.extend(this, {
 					id: p[0],
 					tab: p[1],
 					//url: _modules[p[0]],
 					loaded: true
 				});
-				jPolite.Tabs.addStaticModule(this, p[1])
+				$.jpolite.Tabs.addStaticModule(this, p[1])
 			});
 		}
 	},
 
 	init: function(){
-		this.Header.extend({
-			haha: function(){alert(this.size())},
-			hoho: function(){alert(this.length)}
-		});
 		this.Tabs.init();
 		this.Modules.loadStatic();
+
+		$("#header_tabs li").eq(0).click();
+
 		delete this.Tabs.init;
-		delete jPolite.init;
+		delete this.Modules.loadStatic;
+		delete $.jpolite.init;
 	},
 
 	handleMessage: function(m) {
@@ -126,10 +144,5 @@ function DOC(){
 };
 	
 $(function(){
-	jPolite.init();
-	jPolite.Content.setLayout({
-		c1:{width:'33%'},
-		c2:{width:'33%'},
-		c3:{width:'33%'}
-	});
+	$.jpolite.init();
 });

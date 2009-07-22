@@ -1,0 +1,22 @@
+<p>Lastly, define widths of the columns for the tab in <b>_tabs</b> variable, e.g.,<br>
+<pre>
+...
+t1:{c1:"33.3%",c2:"33.3%",c3:"33.3%",helper:true},
+t2:{c1:"200px",c2:"400px",c3:"200px"}
+t3:{c1:"50%",c2:"50%",c3:"100%",helper:true},
+t4:{c1:"200px",c2:"auto",c3:0}
+...
+</pre>
+Wherein:
+<ul class="bullet">
+	<li><b>t2, t3, t4</b> - tab ID</li>
+	<li><b>c1, c2, c3</b> - column widths definitions. Valid combination include:<br/>
+		%, %, % - columns will float alongside each other. If the sum is greater than 100%, columns may appear on different rows<br/>
+		px, px, px - fixed widths are set likewise. If the sum is greater than 100%, columns may appear on different rows<br/>
+		px, "auto", 0 - c1 is given a fixed width, and c2 will fill the rest of the row, and c3 is usually hidden<br/>
+		...<br/>
+		More features can be added by adjusting function <b>HeaderTabClick</b>defined in <b>myext.js</b>.
+	</li>
+	<li><b>helper</b> - an optional value, when set to true, will load a helper page above the columns named after tab ID, aka, "t3.html" in this case</li>
+</ul>
+</p>

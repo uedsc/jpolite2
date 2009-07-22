@@ -1,9 +1,33 @@
-//jQuery.fn Utility Extensions
-$.extend($.fn, {
+/*
+ * jQuery extensions to support widgetization actions on newly DOM node
+ * Applicable to module_content, helper, dynamic content ...
+ */
+$.extend({
+	AdvControls:{},
+	addControls: function(options) {	//{selector:handler}
+		$.extend($.AdvControls, options);
+	},
+	widgetize: function() {
+		x = this;
+		$.each($.AdvControls, function(selector,handler){
+			handler.apply($(selector, x));
+		})
+	}
+});
+
+/*
+ * Utility functions added to jQuery.fn
+ */
+$.fn.extend({
 	rm: function() {
 		return this.each(function() {
 			this.parentNode.removeChild(this);
 		});
+	},
+	on: function() {
+		if (this.is(".on")) return false;
+		this.siblings(".on").andSelf().toggleClass("on");
+		return true;
 	}
 });
 
@@ -11,7 +35,7 @@ $.jpolite = {
 	_MT: $("#module_template").rm(),
 	Header: $("#header"),
 	Footer: $("#footer"),
-	Tabs: {
+	Nav: {
 		ct: false,				//Current selected tab id
 		ht: $("#header_tabs"),	//Header tab container
 		tabs: {},				//Hash for tabs, tabs[tab_x_id] == tab_x
@@ -22,23 +46,27 @@ $.jpolite = {
 				t[this.id] = this;
 			}).click(function(){
 				if ($(this).is(".on")) return;
-				$.jpolite.Tabs.switchTab(this);
+				$.jpolite.Nav.switchTab(this.id);
 			});
 		},
-		switchTab: function(tab){
+		switchTab: function(id){
 			$(".module:visible").hide();
 			$(this.ct).removeClass("on");
-			this.ct = tab;
-			$(tab).addClass("on");
+			var x = this.tabs[id];
+			this.ct = x;
+			$(x).addClass("on");
 			$.jpolite.Containers.setLayout();
-			$.each(tab.modules, function(i,m){
+			$.each(x.modules, function(i,m){
 				$(m).fadeIn();
 			});
+		},
+		gotoTab: function(id) {
+			this.switchTab(this.tabs[id]);
 		},
 //		addNewTab: function(id, title) {
 //			var tab = $("<li id='" + id + "'>" + title + "</li>")
 //						.appendTo(this.ht)
-//						.click(function(){$.jpolite.Tabs.switchTab(this)})[0];
+//						.click(function(){$.jpolite.Nav.switchTab(this)})[0];
 //			this.tabs[id] = tab;
 //			tab.modules = {};
 //		},
@@ -51,7 +79,7 @@ $.jpolite = {
 		c2:$("#c2"),
 		c3:$("#c3"),
 		setLayout: function () {
-			var x = $.jpolite.Tabs.ct;
+			var x = $.jpolite.Nav.ct;
 			x = _columnLayout[x.id] || _columnLayout._default;
 			this.c1.css(x.c1);
 			this.c2.css(x.c2);
@@ -59,21 +87,42 @@ $.jpolite = {
 		},
 		addModule: function(m) {
 			var c = this[m.c];
-			var t = $.jpolite.Tabs.tabs[m.t];
+			var t = $.jpolite.Nav.tabs[m.tab];
 			if (!c || !t) return;
 
-			var x = $.jpolite._MT.clone()[0];
-			var y = _modules[m.i];
+			var x = $.jpolite._MT.clone(true)[0];
+			$.extend(x, $.jpolite.moduleActions);
+			var y = _modules[m.id];
 			x.loaded = false;
-			x.url = m.url;
-			x.tab = m.t;
-			x.id = m.i;
+			x.url = y.url;
+			x.tab = m.tab;
+			x.id = m.id;
 
-			t.modules[m.i] = x;
+			t.modules[m.id] = x;
 
 			$(".moduleTitle", x).text(y.t);
 			if (y.c) $(x).addClass(y.c);
 			c.prepend(x);
+			x.loadContent();
+		}
+	},
+	moduleActions: {
+		loadContent: function(url) {
+			var u = (url || this.url);
+			if (!u) return;
+			$(".moduleContent", this).load(u, function(){
+				$.widgetize.apply(this);
+			});
+			this.loaded = true;
+		},
+		max: function(){
+			$(".moduleContent", this).show();
+		},
+		min: function(){
+			$(".moduleContent", this).hide();
+		},
+		close: function(){
+			$(this).rm();
 		}
 	},
 	Modules: {
@@ -103,19 +152,21 @@ $.jpolite = {
 					//url: _modules[p[0]],
 					loaded: true
 				});
-				$.jpolite.Tabs.addStaticModule(this, p[1])
+				$.extend(this, $.jpolite.moduleActions);
+				$.widgetize.apply(this);
+				$.jpolite.Nav.addStaticModule(this, p[1])
 			});
 		}
 	},
-
+	
 	init: function(){
-		this.Tabs.init();
+		this.Nav.init();
 		this.Modules.loadStatic();
 		this.Modules.loadLayout();
 
 		$("#header_tabs li").eq(0).click();
 
-		delete this.Tabs.init;
+		delete this.Nav.init;
 		delete this.Modules.loadStatic;
 		delete $.jpolite.init;
 	},
@@ -124,33 +175,6 @@ $.jpolite = {
 		//Process message from server side
 	}
 };
-
-/*
- * jQuery extensions to support widgetization actions on newly DOM node
- * Applicable to module_content, helper, dynamic generated stuff ...
- */
-$.extend({
-	LiveControl:{},
-	AdvControls:{},
-	addLiveControl: function(selector, event, handler) {
-		$(selector).live(event, handler);
-		$.LiveControls[selector] = {e:event, h:handler};
-	},
-	addAdvControls: function(options) {	//{selector:handler}
-		$.extend($.AdvControls, options);
-	}
-});
-
-$.fn.extend({
-	widgetize: function() {
-		return this.each(function() {
-			x = this;
-			$.each($.AdvControls, function(selector,handler){
-				handler.apply($(selector, x));
-			})
-		});
-	}
-});
 
 /*
  * XML Data Object, cache+view layer for server side resources
@@ -188,7 +212,3 @@ function DOC(){
 		};
 	};
 };
-	
-$(function(){
-	$.jpolite.init();
-});

@@ -10,6 +10,10 @@ var _columnLayout = {
 	t3:{ c1:{'float':'left',width:'33%'},
 		 c2:{'float':'left',width:'33%'}, 
 		 c3:{'float':'left',width:'33%'}
+	},
+	t4:{ c1:{'float':'left',width:'20%'},
+		 c2:{'float':'left',width:'80%'}, 
+		 c3:{'float':'left',width:'0'}
 	}
 };
 

@@ -55,6 +55,7 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 
 /* Module Components */
 .module {background:#fff; border:3px solid #bbb; margin:8px 5px; display:none}
+.module:hover {border-color: #999}
 .moduleFrame {border:1px solid #4E8EE2; overflow:hidden;}
 .moduleHeader {height:1.6em; background:#4E8EE2 url(../g/module-header.gif) repeat-x; border-left:1px solid #A7D0F6; border-top:1px solid #A7D0F6; color:#fff; cursor:move; overflow:hidden}
 .moduleIcon, .moduleTitle {line-height:1.4em; float:left; padding-left:2px; font-weight:bold}

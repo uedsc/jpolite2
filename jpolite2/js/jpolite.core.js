@@ -1,5 +1,5 @@
 /*
- * jQuery extensions to support widgetization actions on newly DOM node
+ * jQuery extensions to support widgetization actions on newly DOM nodes
  * Applicable to module_content, helper, dynamic content ...
  */
 $.extend({
@@ -136,10 +136,10 @@ $.jpolite = {
 			$(this).rm();
 		}
 	},
-	Modules: {
+	Layout: {
 		// Load layout defined in modules.js
 		loadLayout: function() {
-			var l = _layout.reverse();
+			var l = _moduleLayout.reverse();
 
 			for (var x in l) $.jpolite.Containers.addModule(l[x]);
 		},
@@ -158,7 +158,7 @@ $.jpolite = {
 				$.extend(this, {
 					id: p[0],
 					tab: p[1],
-					//url: _modules[p[0]],
+					url: _modules[p[0]],
 					loaded: true
 				});
 				$.extend(this, $.jpolite.moduleActions);
@@ -185,13 +185,13 @@ $.jpolite = {
 
 	init: function(){
 		this.Nav.init();
-		this.Modules.loadStatic();
-		this.Modules.loadLayout();
+		this.Layout.loadStatic();
+		this.Layout.loadLayout();
 
 		$("#header_tabs li").eq(0).click();
 
 		delete this.Nav.init;
-		delete this.Modules.loadStatic;
+		delete this.Layout.loadStatic;
 		delete $.jpolite.init;
 	},
 

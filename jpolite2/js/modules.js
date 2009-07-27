@@ -1,8 +1,10 @@
-﻿// Module ID & link definitions
-// Format:
-// moduleId:{l:"url_of_this_module",
-// 			 t:"title_for_this_module",
-// 			 c:"optional color definition for title bar"}
+﻿/*
+ * Module ID & link definitions
+ * Format:
+ * moduleId:{url: "url_of_this_module",
+ *  		 t:   "title_for_this_module",
+ *   		 c:   "optional color definition for title bar"}
+ */ 
 var _modules={
 	m101:{url:"modules/m101.html",	t:"Motivation", c:"red"},
 	m181:{url:"modules/m101.html",	t:"Motivation", c:"red"},
@@ -35,16 +37,20 @@ var _modules={
 
 	m700:{url:"modules/m700.html",	t:"RSSLi Menu (m700)"},
 	m701:{url:"modules/m701.html",	t:"RSS Reader (m701)"},
-	m702:{url:"rss.php?q=http%3A%2F%2Frss.msnbc.msn.com%2Fid%2F3032091%2Fdevice%2Frss%2Frss.xml",	t:"MSNBC - Static RSS Module (m702)"}
+	m702:{url:"rss.php?q=http%3A%2F%2Frss.msnbc.msn.com%2Fid%2F3032091%2Fdevice%2Frss%2Frss.xml",	t:"MSNBC - Static RSS Module (m702)"},
+	
+	m801:{url:"modules/m801.html",	t:"jQuery UI Controls with Theme Support"}
 };
 
-// Layout definitions for each tab, aka, which modules go to which columns under which tab
-// Format:
-//	{i:"id_of_the_module	(refer to _modules)",
-//	c:"column_it_belongs_to	(c1, c2, c3)"
-//	t:"tab_it_belongs_to	(t1, t2, ...)"}
-var _layout=[
-	{id:'m181',c:'c1',tab:'t1'},{id:'m102',c:'c2',tab:'t1'},{id:'m103',c:'c3',tab:'t1'},
+/*
+ * Layout definitions for each tab, i.e., which modules go to which columns under which tab
+ *  Format:
+ *  	{id: "id_of_the_module	(refer to _modules)",
+ *  	 c:  "column_id_belongs_to	(c1, c2, c3)",
+ *  	 t:  "tab_id_belongs_to	(t1, t2, ...)"}
+ */ 
+var _moduleLayout=[
+	{id:'m101',c:'c1',tab:'t1'},{id:'m102',c:'c2',tab:'t1'},{id:'m103',c:'c3',tab:'t1'},
 
 	{id:'m201',c:'c1',tab:'t2'},{id:'m202',c:'c2',tab:'t2'},{id:'m203',c:'c3',tab:'t2'},
 	{id:'m204',c:'c1',tab:'t2'},{id:'m206',c:'c2',tab:'t2'},{id:'m205',c:'c3',tab:'t2'},
@@ -59,5 +65,41 @@ var _layout=[
 	{id:'m602',c:'c1',tab:'t6'},
 
 	{id:'m700',c:'c1',tab:'t7'},{id:'m701',c:'c2',tab:'t7'},
-								{id:'m702',c:'c2',tab:'t7'}
+								{id:'m702',c:'c2',tab:'t7'},
+	{id:'m801',c:'c1',tab:'t8'}
 ];
+
+/* 
+ * Column layout definitions, i.e., how the columns (containers) are placed under each tab
+ * Pure CSS properties can be set upon each column, e.g., width, float, etc. You can refer
+ * to jQuery.fn.css() for more details.
+ * 
+ * The "bg" property is used to set the background of all columns, which actually affects the <body>
+ * 
+ * A _default value set is provided, to save your efforts of setting each tab manually
+ */
+var _columnLayout = {
+	_default: { bg:{background:'#ddd'},
+				c1:{'float':'left',width:'33.3%'},
+				c2:{'float':'left',width:'33.3%'}, 
+				c3:{'float':'left',width:'33.3%'}
+	},
+	t2:{ bg:{background:'#777'},
+		 c1:{'float':'left',width:'20%'},
+		 c2:{'float':'left',width:'40%'}, 
+		 c3:{'float':'left',width:'40%'}
+	},
+	t3:{ bg:{background:'#f0f0f0'},
+		 c1:{'float':'left',width:'33%'},
+		 c2:{'float':'left',width:'33%'}, 
+		 c3:{'float':'left',width:'33%'}
+	},
+	t4:{ c1:{'float':'left',width:'20%'},
+		 c2:{'float':'left',width:'80%'}, 
+		 c3:{'float':'left',width:'0'}
+	},
+	t8:{ c1:{'float':'none',width:'100%'},
+		 c2:{'float':'left',width:'0'}, 
+		 c3:{'float':'left',width:'0'}
+	}
+};

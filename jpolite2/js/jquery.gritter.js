@@ -153,7 +153,8 @@ jQuery(document).ready(function($){
 		 // If the item is fading out and we hover over it, restore it!
 	    restoreItemIfFading: function(e, number){
 			
-	        eval("window.clearTimeout(Gritter._int_id_" + number + ")");
+	        //eval("window.clearTimeout(Gritter._int_id_" + number + ")");
+			window.clearTimeout(Gritter['_int_id_' + number]);
 	        $(e).stop().css({ opacity: 1 });
 	        
 	    },
@@ -162,7 +163,8 @@ jQuery(document).ready(function($){
 	    setFadeTimer: function(item, number){
 			
 			var timer_str = (this._custom_timer) ? this._custom_timer : this.timer_stay;
-	        eval("Gritter._int_id_" + number + " = window.setTimeout(function(){ Gritter.fade(item); }, timer_str)");
+	        //eval("Gritter._int_id_" + number + " = window.setTimeout(function(){ Gritter.fade(item); }, timer_str)");
+	        Gritter['_int_id_' + number] = window.setTimeout(function(){ Gritter.fade(item); }, timer_str);
 	
 	    },
 		

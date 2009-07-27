@@ -31,7 +31,11 @@ $.fn.extend({
 	}
 });
 
+/*
+ * JPolite Core Features and Functions
+ */
 $.jpolite = {
+	_doc: $(document),
 	_MT: $("#module_template").rm(),
 	Header: $("#header"),
 	Footer: $("#footer"),
@@ -56,12 +60,11 @@ $.jpolite = {
 			this.ct = x;
 			$(x).addClass("on");
 			$.jpolite.Containers.setLayout();
-			$.each(x.modules, function(i,m){
+			for (i in x.modules) {
+				var m = x.modules[i];
 				$(m).fadeIn();
-			});
-		},
-		gotoTab: function(id) {
-			this.switchTab(this.tabs[id]);
+				m.loadContent();
+			};
 		},
 //		addNewTab: function(id, title) {
 //			var tab = $("<li id='" + id + "'>" + title + "</li>")
@@ -79,8 +82,9 @@ $.jpolite = {
 		c2:$("#c2"),
 		c3:$("#c3"),
 		setLayout: function () {
-			var x = $.jpolite.Nav.ct;
-			x = _columnLayout[x.id] || _columnLayout._default;
+			var c = $.jpolite.Nav.ct;
+			var x = $.extend({}, _columnLayout._default, _columnLayout[c.id]);
+			$('body').css(x.bg);
 			this.c1.css(x.c1);
 			this.c2.css(x.c2);
 			this.c3.css(x.c3);
@@ -103,17 +107,24 @@ $.jpolite = {
 			$(".moduleTitle", x).text(y.t);
 			if (y.c) $(x).addClass(y.c);
 			c.prepend(x);
-			x.loadContent();
+			if (m.tab == $.jpolite.Nav.ct.id)
+				x.loadContent();
 		}
 	},
 	moduleActions: {
-		loadContent: function(url) {
+		loadContent: function(url, forced) {
+			if (url && url.constructor == Boolean) {
+				forced = url;
+				url = null;
+			}
+			var x = this;
 			var u = (url || this.url);
-			if (!u) return;
+			if (!u || (this.loaded && !forced)) return;
 			$(".moduleContent", this).load(u, function(){
 				$.widgetize.apply(this);
+				$.jpolite.triggerEvent("moduleLoadedEvent", x);
+				x.loaded = true;
 			});
-			this.loaded = true;
 		},
 		max: function(){
 			$(".moduleContent", this).show();
@@ -128,12 +139,9 @@ $.jpolite = {
 	Modules: {
 		// Load layout defined in modules.js
 		loadLayout: function() {
-			var l = _layout;
+			var l = _layout.reverse();
 
-			$.each(l.reverse(), function(i,m) {
-				var x = _modules[m.i];
-				$.jpolite.Containers.addModule(m);
-			});
+			for (var x in l) $.jpolite.Containers.addModule(l[x]);
 		},
 		// Retrieve current layout
 		saveLayout: function() {
@@ -143,6 +151,7 @@ $.jpolite = {
 		
 			return s;
 		},
+		// Make DIV.module sections preloaded in the page active modules 
 		loadStatic: function(){
 			$(".module").each(function(){
 				var p = this.id.split(":");	//m101:t1
@@ -158,7 +167,22 @@ $.jpolite = {
 			});
 		}
 	},
-	
+
+	MessageRegistry: {
+		//find out what the target: header, tab#id, helper, container#id, module#id
+		jpolite: [],
+		//update content of a module
+		module: [],
+		//find out which XDO to handle, name#url
+		//show some alerts to user (after success)
+		msg: [
+			function(msg) {
+				$.jpolite.alert({title:'System Notification', text:msg});
+				return true;
+			}
+		]
+	},
+
 	init: function(){
 		this.Nav.init();
 		this.Modules.loadStatic();
@@ -171,44 +195,32 @@ $.jpolite = {
 		delete $.jpolite.init;
 	},
 
-	handleMessage: function(m) {
-		//Process message from server side
-	}
-};
-
-/*
- * XML Data Object, cache+view layer for server side resources
- * with Embedded RESTful resource discovery mechanism
- * Currently only support JSON formatted data
- */
-var XDO = {
-	XDOS: {},
-	UIOS: {},
+	registerMessageHandlers: function(handlers) {
+		var MR = this.MessageRegistry;
+		for (var obj in handlers) {
+			if (!MR[obj]) MR[obj]=[];
+			MR[obj].push(handlers[obj])
+		}
+	},
 
 	handleMessage: function(m) {
-		//Process message from server side
-	}
-};
-
-/*
- * Document Object and surpporting functions for Event Processing and beyond
- * Custom Event Registration & Hooking also Supported
- */
-function DOC(){
-	this._doc = $(document);
-	
-	function MessageHandler(json){
-		switch (json.target) {
-			case 'module': //update content of a moduke
-				break;
-			case 'jpolite': //find out what the target: header, tab#id, helper, container#id, module#id
-				break;
-			case 'resource': //find out which XDO to handle, name#url
-				break;
-			case 'message': //show some alerts to user
-				break;
-			case 'errors': //Prompt user about errors
-				break;
+		var rv = true;
+		for (var k in m) {
+			var x = this.MessageRegistry[k];
+			if (x) for (var i in x) x[i](m[k])
 		};
-	};
+		return rv;
+	},
+	
+	alert: function(msg) {
+		$.gritter.add(msg);
+	},
+	
+	bindEvent: function(events){
+		for (var e in events) $.jpolite._doc.bind(e, events[e]);
+	},
+	
+	triggerEvent: function(evt, data){
+		this._doc.trigger(evt, data);
+	}
 };

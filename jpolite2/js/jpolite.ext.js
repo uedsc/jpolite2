@@ -147,10 +147,34 @@ $(function(){
 
 	//Assign Controls handlers to selectors 
 	$.addControls({
-		".tabs":		$.fn.Tabs,
-		".accordion":	$.fn.Accordion,
-		".maccordion":	$.fn.MAccordion,
-		".jsonform":	$.fn.JsonForm
+		//JPolite native elements, zero arguement
+		".tabs":		[$.fn.Tabs],
+		".accordion":	[$.fn.Accordion],
+		".maccordion":	[$.fn.MAccordion],
+		".jsonform":	[$.fn.JsonForm],
+		
+		//jqModal elements, One object as arguement
+		".jqmWindow":	[$.fn.jqm, {toTop:true}],
+		
+		//Below are elements from jQuery UI, check out m801.html
+		".accordion1":	[$.fn.accordion,{ header: "h3" }],
+		".tabs1":		[$.fn.tabs],
+		".dialog":		[$.fn.dialog, {
+							autoOpen: false,
+							width: 600,
+							buttons: {
+								"Ok": function() {$(this).dialog("close");},
+								"Cancel": function() {$(this).dialog("close");} 
+							}
+						}],
+		".datepicker":	[$.fn.datepicker, {inline: true}],
+		".slider":		[$.fn.slider,{range: true, values: [17, 67]}],
+		".progressbar":	[$.fn.progressbar,{value: 20}],
+		//hover takes 2 arguements --> pass them in an Array
+		"#dialog_link, ul#icons li": [$.fn.hover,[
+			function() { $(this).addClass('ui-state-hover'); },
+			function() { $(this).removeClass('ui-state-hover'); }
+		]]
 	});
 	$.jpolite.init();
 	$.jpolite.alert({
@@ -184,54 +208,4 @@ function test(){
 		]
 	});
 	return false;
-};
-
-function jQueryUIInit(){
-	// Accordion
-	$("#accordion").accordion({ header: "h3" });
-
-	// Tabs
-	$('#tabs').tabs();
-
-	// Dialog			
-	$('#dialog').dialog({
-		autoOpen: false,
-		width: 600,
-		buttons: {
-			"Ok": function() { 
-				$(this).dialog("close"); 
-			}, 
-			"Cancel": function() { 
-				$(this).dialog("close"); 
-			} 
-		}
-	});
-	
-	// Dialog Link
-	$('#dialog_link').click(function(){
-		$('#dialog').dialog('open');
-		return false;
-	});
-
-	// Datepicker
-	$('#datepicker').datepicker({
-		inline: true
-	});
-	
-	// Slider
-	$('#slider').slider({
-		range: true,
-		values: [17, 67]
-	});
-	
-	// Progressbar
-	$("#progressbar").progressbar({
-		value: 20 
-	});
-	
-	//hover states on the static widgets
-	$('#dialog_link, ul#icons li').hover(
-		function() { $(this).addClass('ui-state-hover'); }, 
-		function() { $(this).removeClass('ui-state-hover'); }
-	);
 };

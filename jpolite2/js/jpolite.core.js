@@ -8,10 +8,13 @@ $.extend({
 		$.extend($.AdvControls, options);
 	},
 	widgetize: function() {
-		x = this;
-		$.each($.AdvControls, function(selector,handler){
-			handler.apply($(selector, x));
-		})
+		for (s in $.AdvControls) {
+			var f = $.AdvControls[s][0];
+			var p = $.AdvControls[s][1];
+
+			if (p && (p.constructor == Array)) f.apply($(s, this), p);
+			else f.call($(s, this), p);
+		}
 	}
 });
 

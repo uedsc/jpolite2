@@ -51,10 +51,18 @@ $.jpolite = {
 			$("li", this.ht).each(function(){
 				this.modules = {};
 				t[this.id] = this;
+				$("<b class='hover'></b>").text(this.innerHTML).prependTo(this);
 			}).click(function(){
 				if ($(this).is(".on")) return;
 				$.jpolite.Nav.switchTab(this.id);
-			});
+			}).hover(
+				function(){
+					$(".hover", this).stop().animate({opacity:.9},700, 'easeOutSine')
+				},
+				function(){
+					$(".hover", this).stop().animate({opacity:0},700, 'easeOutExpo')
+				}
+			);
 		},
 		switchTab: function(id){
 			$(".module:visible").hide();
@@ -88,9 +96,9 @@ $.jpolite = {
 			var c = $.jpolite.Nav.ct;
 			var x = $.extend({}, _columnLayout._default, _columnLayout[c.id]);
 			$('body').css(x.bg);
-			this.c1.css(x.c1);
-			this.c2.css(x.c2);
-			this.c3.css(x.c3);
+			this.c1.attr('class',x.c1);
+			this.c2.attr('class',x.c2);
+			this.c3.attr('class',x.c3);
 		},
 		addModule: function(m) {
 			var c = this[m.c];

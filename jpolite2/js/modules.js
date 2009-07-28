@@ -80,26 +80,27 @@ var _moduleLayout=[
  */
 var _columnLayout = {
 	_default: { bg:{background:'#ddd'},
-				c1:{'float':'left',width:'33.3%'},
-				c2:{'float':'left',width:'33.3%'}, 
-				c3:{'float':'left',width:'33.3%'}
+				c1:'span-8',
+				c2:'span-8',
+				c3:'span-8 last'
 	},
 	t2:{ bg:{background:'#777'},
-		 c1:{'float':'left',width:'20%'},
-		 c2:{'float':'left',width:'40%'}, 
-		 c3:{'float':'left',width:'40%'}
+		 c1:'span-8',
+		 c2:'span-8',
+		 c3:'span-8 last'
 	},
 	t3:{ bg:{background:'#f0f0f0'},
-		 c1:{'float':'left',width:'33%'},
-		 c2:{'float':'left',width:'33%'}, 
-		 c3:{'float':'left',width:'33%'}
+		 c1:'span-12',
+		 c2:'span-12 last',
+		 c3:'span-24'
 	},
-	t4:{ c1:{'float':'left',width:'20%'},
-		 c2:{'float':'left',width:'80%'}, 
-		 c3:{'float':'left',width:'0'}
+	t4:{ c1:'span-6',
+		 c2:'span-18 last',
+		 c3:'hide'
+
 	},
-	t8:{ c1:{'float':'none',width:'100%'},
-		 c2:{'float':'left',width:'0'}, 
-		 c3:{'float':'left',width:'0'}
+	t8:{ c1:'span-24',
+		 c2:'span-8',
+		 c3:'span-8 last'
 	}
 };

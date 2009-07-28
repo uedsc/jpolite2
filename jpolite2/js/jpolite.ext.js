@@ -19,6 +19,13 @@ $.fn.extend({
 					if (!$(this).on()) return;
 
 					$(this.target).siblings("div:visible").andSelf().toggle();
+					
+					//Ajax Lazy Loading Support
+					var a = $("a", this); 
+					if ((a.size() > 0) && !this.loaded) {
+						$(this.target).load(_modules[a[0].rel].url, $.widgetize);
+						this.loaded = true;
+					}
 				});
 			}).eq(0).click();
 		});
@@ -35,7 +42,7 @@ $.fn.extend({
 			}).eq(0).click();
 		});
 	},
-	
+
 	// Used on pre-formated <DL.maccordion> section
 	MAccordion: function() {
 		return this.each(function() {
@@ -47,7 +54,7 @@ $.fn.extend({
 			});
 		});
 	},
-	
+
 	// Used on FORM.jsonform, shall call the CallBack function with returned data
 	JsonForm: function() {
 		this.append($("<div class='error'/><div class='notice'/>").hide());
@@ -109,8 +116,8 @@ function myMessageHandlers() {
 		login:	Login,
 		resource: function(res){
 			for (var i in res) {
-				o = res[i];
-				p = [o.name];
+				var o = res[i];
+				var p = [o.name];
 				if (o.url) p.push(o.url);
 				p.push(true);
 				$.jpolite.triggerEvent(o.method == 'destroy' ? "destroyEvent" : "refreshEvent", p);					
@@ -136,27 +143,26 @@ function myMessageHandlers() {
 		}
 	})
 };
-/*
- * Initialization Code
- */
-$(function(){
-	//Load Live / Custom Events & Message Handlers
-	myLiveEvents();
-	myCustomEvents();
-	myMessageHandlers();
 
+/*
+ * Here you can define which controls you want in the format of
+ * {selector} : [callBackFunction, {one:argument}] or 
+ * {selector} : [callBackFunction, [array, of, arguments]]
+ * The callBackFunctions will be called upon each module content
+ */
+function myControls(){
 	//Assign Controls handlers to selectors 
 	$.addControls({
-		//JPolite native elements, zero arguement
+		//JPolite native controls, zero arguement
 		".tabs":		[$.fn.Tabs],
 		".accordion":	[$.fn.Accordion],
 		".maccordion":	[$.fn.MAccordion],
 		".jsonform":	[$.fn.JsonForm],
-		
-		//jqModal elements, One object as arguement
+
+		//jqModal controls, One object as arguement
 		".jqmWindow":	[$.fn.jqm, {toTop:true}],
-		
-		//Below are elements from jQuery UI, check out m801.html
+
+		//Below are controls from jQuery UI, check out m801.html
 		".accordion1":	[$.fn.accordion,{ header: "h3" }],
 		".tabs1":		[$.fn.tabs],
 		".dialog":		[$.fn.dialog, {
@@ -171,11 +177,25 @@ $(function(){
 		".slider":		[$.fn.slider,{range: true, values: [17, 67]}],
 		".progressbar":	[$.fn.progressbar,{value: 20}],
 		//hover takes 2 arguements --> pass them in an Array
-		"#dialog_link, ul#icons li": [$.fn.hover,[
-			function() { $(this).addClass('ui-state-hover'); },
-			function() { $(this).removeClass('ui-state-hover'); }
-		]]
+		"#dialog_link, ul#icons li": [$.fn.hover,
+			[
+				function() { $(this).addClass('ui-state-hover'); },
+				function() { $(this).removeClass('ui-state-hover'); }
+			]
+		]
 	});
+};
+
+/*
+ * Initialization Code
+ */
+$(function(){
+	//Load Live / Custom Events & Message Handlers
+	myLiveEvents();
+	myCustomEvents();
+	myMessageHandlers();
+	myControls();
+
 	$.jpolite.init();
 	$.jpolite.alert({
 		title: 'Notification powered by Gritter',

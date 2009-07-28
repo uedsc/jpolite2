@@ -42,19 +42,23 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 #header_tabs {padding-left:160px; list-style-type:none; overflow:hidden; margin:0}
 #header_tabs li {padding:0 1em; float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#eee;
 				background:#6ae url(../g/header.png) 0 -8px; border-width:1px 1px 0 1px; border-style:solid; border-color:#acf #05b #000 #acf;
-				margin:0 3px;cursor:pointer; white-space:nowrap;}
-#header_tabs li:hover {color:#fff}				
+				margin:0 3px;cursor:pointer; white-space:nowrap; position:relative}
+#header_tabs .hover {opacity:0; filter:alpha(opacity=0); display:block; background:url(../g/tabon.gif) repeat-x; position:absolute; left:0; right:0; width:100%; height:100%; text-align:center; margin:0;color:#333}
 #header_tabs li.on {color:#07e; background:#f8f8f8 url(../g/tabon.gif) repeat-x;}
 
 
 /**************************************/
 /*            MAIN CONTENT            */
 /**************************************/
-#content {padding:3px; position:relative;overflow:hidden}
-.container {float:left;min-height:5em}
+#content {
+	/*
+	 * width:950px ==> this is the default value set by bluetrip .container class
+	 * You can adjust the width manually with a value = 950 +/- n*40
+	 */
+}
 
 /* Module Components */
-.module {background:#fff; border:3px solid #bbb; margin:8px 5px; display:none}
+.module {border:3px solid #bbb; margin:10px 0; display:none}
 .module:hover {border-color: #999}
 .moduleFrame {border:1px solid #4E8EE2; overflow:hidden;}
 .moduleHeader {height:1.6em; background:#4E8EE2 url(../g/module-header.gif) repeat-x; border-left:1px solid #A7D0F6; border-top:1px solid #A7D0F6; color:#fff; cursor:move; overflow:hidden}
@@ -66,7 +70,7 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 	.actionMin		{background:url('../g/actionMin.png')}
 	.actionClose	{background:url('../g/actionClose.png')}
 .moduleHeader:hover .moduleActions {display:block}
-.moduleContent {border-top:1px solid #ddd; background:#fff url(g/nav_bg.gif) 0 -5px repeat-x; padding:5px}
+.moduleContent {border-top:1px solid #ddd; background:#fff url(../g/tabon.gif) 0 -5px repeat-x; padding:5px; }
 
 /* Simple Theme for Modules */
 .red .moduleHeader{background:#e24e61 url(../g/module-orange.gif) repeat-x; border-color:#F6A7B8;}

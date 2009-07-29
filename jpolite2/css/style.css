@@ -39,18 +39,19 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 /**************************************/
 /*             NAVIGATION             */
 /**************************************/
-#header_tabs {padding-left:160px; list-style-type:none; overflow:hidden; margin:0}
-#header_tabs li {padding:0 1em; float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#eee;
+/* JPolite Native Navigation Tab */
+#header_tabs {list-style-type:none; overflow:hidden; margin:0 0 0 160px; position:relative}
+#header_tabs li {width:9em; text-align:center; float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#eee;
 				background:#6ae url(../g/header.png) 0 -8px; border-width:1px 1px 0 1px; border-style:solid; border-color:#acf #05b #000 #acf;
-				margin:0 3px;cursor:pointer; white-space:nowrap; position:relative}
+				margin:0 3px; cursor:pointer; white-space:nowrap; position:relative}
 #header_tabs .hover {opacity:0; filter:alpha(opacity=0); display:block; background:url(../g/tabon.gif) repeat-x; position:absolute; left:0; right:0; width:100%; height:100%; text-align:center; margin:0;color:#333}
 #header_tabs li.on {color:#07e; background:#f8f8f8 url(../g/tabon.gif) repeat-x;}
-
-
+#header_tabs li.on .hover {color:#e33}
 /**************************************/
 /*            MAIN CONTENT            */
 /**************************************/
 #content {
+	display:none;
 	/*
 	 * width:950px ==> this is the default value set by bluetrip .container class
 	 * You can adjust the width manually with a value = 950 +/- n*40

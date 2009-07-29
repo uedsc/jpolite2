@@ -7,28 +7,38 @@
 		<script>
 			var x = {};
 			for (i = 0; i < 1000; i++) x['a' + i] = 0;
-			
-			var y = undefined || 33;
-			alert(y)
-			
-			function t1() {
+
+			$.extend({
+				aa: 1234,
+				bb:function(){
+					this.aa = 1;
+				}
+			})
+
+			function test(t) {
 				var s = (new Date()).getTime();
-				for (var i in x) x[i]=1;
+				t();				
 				s = (new Date()).getTime() - s;
-				alert(s)
+				$("#result").text(s)
+			}
+			function t1() {
+				for (var i in x) x[i]=1;
 			};
 			function t2() {
-				var s = (new Date()).getTime();
 				$.each(x, function(n,v){
 					x[n]=1;
 				})
-				s = (new Date()).getTime() - s;
-				alert(s)
 			};
+			function t3() {
+				for (var i = 0; i < 100000; i++)
+					$.bb();
+			}
 		</script>
 	</head>
 	<body>
-		<input type="button" onclick="t1()" value="t1"/>
-		<input type="button" onclick="t2()" value="t2"/>
+		<input type="button" onclick="test(t1)" value="t1"/>
+		<input type="button" onclick="test(t2)" value="t2"/>
+		<input type="button" onclick="test(t3)" value="t3"/>
+		<div id="result"></div>
 	</body>
 </html>

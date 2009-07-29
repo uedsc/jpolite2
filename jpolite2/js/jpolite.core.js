@@ -3,18 +3,21 @@
  * Applicable to module_content, helper, dynamic content ...
  */
 $.extend({
-	AdvControls:{},
+	_widgetControls:{},
 	addControls: function(options) {	//{selector:handler}
-		$.extend($.AdvControls, options);
+		this.extend(this._widgetControls, options);
 	},
 	widgetize: function() {
-		for (s in $.AdvControls) {
-			var f = $.AdvControls[s][0];
-			var p = $.AdvControls[s][1];
+		for (s in $._widgetControls) {
+			var f = $._widgetControls[s][0];
+			var p = $._widgetControls[s][1];
 
 			if (p && (p.constructor == Array)) f.apply($(s, this), p);
 			else f.call($(s, this), p);
 		}
+	},
+	alert: function(msg) {
+		this.gritter.add(msg);
 	}
 });
 
@@ -42,40 +45,47 @@ $.jpolite = {
 	_MT: $("#module_template").rm(),
 	Header: $("#header"),
 	Footer: $("#footer"),
+	t1: $.fn.fadeOut,
+	t2: $.fn.fadeIn,
 	Nav: {
-		ct: false,				//Current selected tab id
-		ht: $("#header_tabs"),	//Header tab container
-		tabs: {},				//Hash for tabs, tabs[tab_x_id] == tab_x
-		init: function(){
+		ct: false,	//Current selected tab id
+		its: null,	//Collection of tab items
+		tabs: {},	//Hash for tabs, tabs[tab_x_id] == tab_x
+
+		init: function(cts, its, func){
 			var t = this.tabs;
-			$("li", this.ht).each(function(){
+			this.its = $(its, cts).each(function(i){
 				this.modules = {};
 				t[this.id] = this;
-				$("<b class='hover'></b>").text(this.innerHTML).prependTo(this);
+				func.call(this, i);
 			}).click(function(){
-				if ($(this).is(".on")) return;
+				if (!$(this).on()) return;
 				$.jpolite.Nav.switchTab(this.id);
-			}).hover(
-				function(){
-					$(".hover", this).stop().animate({opacity:.9},700, 'easeOutSine')
-				},
-				function(){
-					$(".hover", this).stop().animate({opacity:0},700, 'easeOutExpo')
-				}
-			);
+			});
+		},
+		gotoTab: function(id) {
+			var x;
+			if (id) x = this.tabs[id];
+			if (!x) x = this.its()[0];
+			$(x).click();
 		},
 		switchTab: function(id){
-			$(".module:visible").hide();
-			$(this.ct).removeClass("on");
+			var c = $("#content");
+			var mv = $(".module:visible");
 			var x = this.tabs[id];
 			this.ct = x;
-			$(x).addClass("on");
-			$.jpolite.Containers.setLayout();
-			for (i in x.modules) {
-				var m = x.modules[i];
-				$(m).fadeIn();
-				m.loadContent();
+			var f = function(){
+				mv.hide();
+				$.jpolite.Containers.setLayout();
+				for (i in x.modules) {
+					var m = x.modules[i];
+					$(m).show();
+					m.loadContent();
+				};
+				$.jpolite.t2.call(c, 1000);
 			};
+
+			$.jpolite.t1.apply(c, ['slow', f]);
 		},
 //		addNewTab: function(id, title) {
 //			var tab = $("<li id='" + id + "'>" + title + "</li>")
@@ -95,7 +105,7 @@ $.jpolite = {
 		setLayout: function () {
 			var c = $.jpolite.Nav.ct;
 			var x = $.extend({}, _columnLayout._default, _columnLayout[c.id]);
-			$('body').css(x.bg);
+			$('body').animate(x.bg);
 			this.c1.attr('class',x.c1);
 			this.c2.attr('class',x.c2);
 			this.c3.attr('class',x.c3);
@@ -133,7 +143,7 @@ $.jpolite = {
 			if (!u || (this.loaded && !forced)) return;
 			$(".moduleContent", this).load(u, function(){
 				$.widgetize.apply(this);
-				$.jpolite.triggerEvent("moduleLoadedEvent", x);
+				//$.jpolite.triggerEvent("moduleLoadedEvent", x);
 				x.loaded = true;
 			});
 		},
@@ -188,18 +198,17 @@ $.jpolite = {
 		//show some alerts to user (after success)
 		msg: [
 			function(msg) {
-				$.jpolite.alert({title:'System Notification', text:msg});
+				$.alert({title:'System Notification', text:msg});
 				return true;
 			}
 		]
 	},
 
 	init: function(){
-		this.Nav.init();
 		this.Layout.loadStatic();
 		this.Layout.loadLayout();
 
-		$("#header_tabs li").eq(0).click();
+		//this.Nav.tabs['t1'].click();
 
 		delete this.Nav.init;
 		delete this.Layout.loadStatic;
@@ -222,11 +231,7 @@ $.jpolite = {
 		};
 		return rv;
 	},
-	
-	alert: function(msg) {
-		$.gritter.add(msg);
-	},
-	
+
 	bindEvent: function(events){
 		for (var e in events) $.jpolite._doc.bind(e, events[e]);
 	},

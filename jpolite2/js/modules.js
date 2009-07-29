@@ -79,17 +79,17 @@ var _moduleLayout=[
  * A _default value set is provided, to save your efforts of setting each tab manually
  */
 var _columnLayout = {
-	_default: { bg:{background:'#ddd'},
+	_default: { bg:{backgroundColor:'#ddd'},
 				c1:'span-8',
 				c2:'span-8',
 				c3:'span-8 last'
 	},
-	t2:{ bg:{background:'#777'},
+	t2:{ bg:{backgroundColor:'#777'},
 		 c1:'span-8',
 		 c2:'span-8',
 		 c3:'span-8 last'
 	},
-	t3:{ bg:{background:'#f0f0f0'},
+	t3:{ bg:{backgroundColor:'#f0f0f0'},
 		 c1:'span-12',
 		 c2:'span-12 last',
 		 c3:'span-24'

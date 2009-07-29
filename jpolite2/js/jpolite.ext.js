@@ -88,7 +88,7 @@ function myLiveEvents(){
 		$(this).parents(".module")[0].close();	
 	});
 	$("a.tab").live("click", function(){
-		$.jpolite.Nav.switchTab(this.rel);
+		$.jpolite.Nav.gotoTab(this.rel);
 		return false;	
 	});
 	$("a.local").live("click", function(){
@@ -103,7 +103,7 @@ function myLiveEvents(){
 function myCustomEvents(){
 	$.jpolite.bindEvent({
 		"moduleLoadedEvent": function(e, target){
-			$.jpolite.alert({title:'module Loaded',text:target.url})
+			$.alert({title:'module Loaded',text:target.url})
 		}
 	})
 };
@@ -187,6 +187,17 @@ function myControls(){
 };
 
 /*
+ * Here you can customize the appearance / behavior of navigation tabs
+ */
+function InitTabs(){
+		$("<b class='hover'></b>").text(this.innerHTML).prependTo(this);
+		$(this).hover(
+			function(){$(".hover", this).stop().animate({opacity:.9},700, 'easeOutSine')},
+			function(){$(".hover", this).stop().animate({opacity:0},700,  'easeOutExpo')}
+		);
+};
+
+/*
  * Initialization Code
  */
 $(function(){
@@ -196,8 +207,16 @@ $(function(){
 	myMessageHandlers();
 	myControls();
 
+	//Here you can customize the look and feel of the navigation tabs
+	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
+	var useKwicks = confirm("Enable Kwicks-styled navigation tabs?\n(Cancel will enable the traditional tab behavior)");
+	if (useKwicks) $("#header_tabs").kwicks({max:180, spacing:5, sticky:true, event:'click'}); 
+	$.jpolite.Nav.init("#header_tabs", "li", useKwicks ? function(){} : InitTabs);
+
 	$.jpolite.init();
-	$.jpolite.alert({
+	
+	$.jpolite.Nav.gotoTab('t1');	//Activate the first tab by default, or another id of your choice
+	$.alert({
 		title: 'Notification powered by Gritter',
 		text: 'JPolite is up!'
 	});

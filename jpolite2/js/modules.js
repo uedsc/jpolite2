@@ -50,7 +50,7 @@ var _modules={
  *  	 t:  "tab_id_belongs_to	(t1, t2, ...)"}
  */ 
 var _moduleLayout=[
-	{id:'m101',c:'c1',tab:'t1'},{id:'m102',c:'c2',tab:'t1'},{id:'m103',c:'c3',tab:'t1'},
+	{id:'m101',c:'c1',tab:'t1',mt:'B'},{id:'m102',c:'c2',tab:'t1',mt:'C'},{id:'m103',c:'c3',tab:'t1'},
 
 	{id:'m201',c:'c1',tab:'t2'},{id:'m202',c:'c2',tab:'t2'},{id:'m203',c:'c3',tab:'t2'},
 	{id:'m204',c:'c1',tab:'t2'},{id:'m206',c:'c2',tab:'t2'},{id:'m205',c:'c3',tab:'t2'},
@@ -79,17 +79,17 @@ var _moduleLayout=[
  * A _default value set is provided, to save your efforts of setting each tab manually
  */
 var _columnLayout = {
-	_default: { bg:{backgroundColor:'#ddd'},
+	_default: { bg:'haha',
 				c1:'span-8',
 				c2:'span-8',
 				c3:'span-8 last'
 	},
-	t2:{ bg:{backgroundColor:'#777'},
+	t2:{ bg:'hehe',
 		 c1:'span-8',
 		 c2:'span-8',
 		 c3:'span-8 last'
 	},
-	t3:{ bg:{backgroundColor:'#f0f0f0'},
+	t3:{ bg:'hoho',
 		 c1:'span-12',
 		 c2:'span-12 last',
 		 c3:'span-24'

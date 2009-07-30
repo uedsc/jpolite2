@@ -61,7 +61,7 @@ $.fn.extend({
 		return this.submit(function(){
 			var f = this;
 			$.post(this.action, $(this).serialize() + auth_token_key, function(data){
-				if ($.jpolite.HandleMessage(data))
+				if ($.HandleMessage(data))
 					$(".jqmWindow:visible").jqmHide();
 			},"json");
 			return false;
@@ -88,8 +88,8 @@ function myLiveEvents(){
 		$(this).parents(".module")[0].close();	
 	});
 	$("a.tab").live("click", function(){
-		$.jpolite.Nav.gotoTab(this.rel);
-		return false;	
+		$.jpolite.gotoTab(this.rel);
+		return false;
 	});
 	$("a.local").live("click", function(){
 		$(this).parents(".module")[0].loadContent(this.href);
@@ -101,7 +101,7 @@ function myLiveEvents(){
  * Here you can register Custom System Events
  */
 function myCustomEvents(){
-	$.jpolite.bindEvent({
+	$.bindEvent({
 		"moduleLoadedEvent": function(e, target){
 			$.alert({title:'module Loaded',text:target.url})
 		}
@@ -112,7 +112,7 @@ function myCustomEvents(){
  * Here you can register the message handlers for messages returned from Server side
  */
 function myMessageHandlers() {
-	$.jpolite.registerMessageHandlers({
+	$.registerMsgHandlers({
 		login:	Login,
 		resource: function(res){
 			for (var i in res) {
@@ -120,7 +120,7 @@ function myMessageHandlers() {
 				var p = [o.name];
 				if (o.url) p.push(o.url);
 				p.push(true);
-				$.jpolite.triggerEvent(o.method == 'destroy' ? "destroyEvent" : "refreshEvent", p);					
+				$.triggerEvent(o.method == 'destroy' ? "destroyEvent" : "refreshEvent", p);					
 			}
 			return true;
 		},
@@ -187,14 +187,17 @@ function myControls(){
 };
 
 /*
- * Here you can customize the appearance / behavior of navigation tabs
+ * A traditional navigation tabs initializer with tricks from Dragon Interactive:
+ * http://labs.dragoninteractive.com/pufferfish_article.php
  */
-function InitTabs(){
+function TraditionalTabs(){
+	this.children("li").each(function(){
 		$("<b class='hover'></b>").text(this.innerHTML).prependTo(this);
 		$(this).hover(
 			function(){$(".hover", this).stop().animate({opacity:.9},700, 'easeOutSine')},
 			function(){$(".hover", this).stop().animate({opacity:0},700,  'easeOutExpo')}
 		);
+	})
 };
 
 /*
@@ -207,15 +210,26 @@ $(function(){
 	myMessageHandlers();
 	myControls();
 
-	//Here you can customize the look and feel of the navigation tabs
+	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
-	var useKwicks = confirm("Enable Kwicks-styled navigation tabs?\n(Cancel will enable the traditional tab behavior)");
-	if (useKwicks) $("#header_tabs").kwicks({max:180, spacing:5, sticky:true, event:'click'}); 
-	$.jpolite.Nav.init("#header_tabs", "li", useKwicks ? function(){} : InitTabs);
+	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
+	var customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks\n2 - LavaLamp\n3 - 'Traditional'");
+	switch (customNav) {
+	case	'1':
+			$.jpolite.Nav.init("#header_tabs", "li", $.fn.kwicks, {max:180, spacing:5, sticky:true, event:'click'});
+			break;
+	case	'2':
+			//Just a little cusomization to the appearance of tabs
+			$("li", "#header_tabs").css({background:"transparent", border:0})
+			$("#header_tabs").prepend("<li class='backLava'></li>")
+			$.jpolite.Nav.init("#header_tabs", "li", $.fn.lavaLamp, {startItem:1});
+			break;
+	default:
+			$.jpolite.Nav.init("#header_tabs", "li", TraditionalTabs);
+	}
 
 	$.jpolite.init();
-	
-	$.jpolite.Nav.gotoTab('t1');	//Activate the first tab by default, or another id of your choice
+	$.jpolite.gotoTab('t1');	//Activate the first tab by default, or another id of your choice
 	$.alert({
 		title: 'Notification powered by Gritter',
 		text: 'JPolite is up!'
@@ -237,7 +251,7 @@ function Login(){
 };
 
 function test(){
-	$.jpolite.handleMessage({
+	$.handleMessage({
 		error:'too bad!',
 		msg: 'haha',
 		notice:[['name','too short']],

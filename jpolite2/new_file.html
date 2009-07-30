@@ -6,6 +6,10 @@
 		<script src="js/jquery.js"></script>
 		<script>
 			var x = {};
+			var a = true;
+			
+			alert(typeof c);
+			alert(a.constructor);
 			for (i = 0; i < 1000; i++) x['a' + i] = 0;
 
 			$.extend({
@@ -13,7 +17,7 @@
 				bb:function(){
 					this.aa = 1;
 				}
-			})
+			});
 
 			function test(t) {
 				var s = (new Date()).getTime();
@@ -32,7 +36,7 @@
 			function t3() {
 				for (var i = 0; i < 100000; i++)
 					$.bb();
-			}
+			};
 		</script>
 	</head>
 	<body>

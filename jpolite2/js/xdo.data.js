@@ -14,15 +14,15 @@ $.extend($.UIOS,{
 
 function XDOLiveEvents(){
 	$("a.refresh").live("click",function(){
-		$.jpolite.triggerEvent("refreshEvent", this.rev.split("#"));
+		$.triggerEvent("refreshEvent", this.rev.split("#"));
 		return false;
 	});
 	$("a.showObj").live("click", function(){
-		$.jpolite.triggerEvent('showObjEvent', this.rev.split("#"));
+		$.triggerEvent('showObjEvent', this.rev.split("#"));
 		return false;
 	});
 	$("a.action").live("click", function(){
-		$.jpolite.triggerEvent('actionEvent',(this.rev).split("#"));
+		$.triggerEvent('actionEvent',(this.rev).split("#"));
 		return false;
 	});
 	$("li.treeLi").live("click", function(){
@@ -33,7 +33,7 @@ function XDOLiveEvents(){
 };
 
 function XDOCustomEvents(){
-	$.jpolite.bindEvent({
+	$.bindEvent({
 		"moduleLoadedEvent": function(e, t){
 			$("a.refresh",t).click();
 		},

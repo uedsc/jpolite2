@@ -13,7 +13,7 @@
 <link type="text/css" title="Start" href="css/start/jquery-ui-1.7.2.custom.css" rel="stylesheet"/>
 <link type="text/css" title="Le-frog" href="css/le-frog/jquery-ui-1.7.2.custom.css" rel="alternate stylesheet" />
 </head>
-<body>
+<body class="haha">
 <div id="header">
 	<div id="logo"></div>
 	<div id="title">A Lightweight Portal Framework based on jQuery</div>
@@ -218,8 +218,8 @@
 Copyright 2009 (C) Trilancer.com
 </div>
 
-<!-- A hidden module template is carried within the page, which can be modified easily -->
-<div id="module_template" class="module">
+<!-- A series of hidden module templates carried within the page, which can be modified easily -->
+<div class="module_template"><!-- A default template is required here without an ID -->
 	<div class="moduleFrame">
 		<div class='moduleHeader'>
 			<span class="moduleIcon"><img alt="icon" src="g/icon.gif"/></span>
@@ -236,13 +236,28 @@ Copyright 2009 (C) Trilancer.com
 		</div>
 	</div>
 </div>
+<div class="module_template" id="B"><!-- The ID 'B' will be used as the index to match all module layout definition whose mt:'B' -->
+	<div class="moduleFrame" style="border-width:4px">
+		<div class='moduleContent'>
+			<img src="g/loading.gif" alt="Loading..."/> Loading...
+		</div>
+	</div>
+</div>
+<div class="module_template" id="C"><!-- The ID 'C' will be used as the index to match all module layout definition whose mt:'C' -->
+	<div class="moduleFrame" style="border-width:6px; border-style:double">
+		<div class='moduleContent'>
+			<img src="g/loading.gif" alt="Loading..."/> Loading...
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
 <script type="text/javascript" src="js/modules.js"></script>
 <script type="text/javascript" src="js/jquery.gritter.js"></script>
 <script type="text/javascript" src="js/chain-0.2.pack.js"></script>
 <script type="text/javascript" src="js/jquery.kwicks-1.5.1.pack.js"></script>
-<script type="text/javascript" src="js/jquery.color.js"></script>
+<script type="text/javascript" src="js/jquery.lavalamp.1.3.2-min.js"></script>
 <script type="text/javascript" src="js/jqModal.js"></script>
 <script type="text/javascript" src="js/jpolite.core.js"></script>
 <script type="text/javascript" src="js/xdo.core.js"></script>

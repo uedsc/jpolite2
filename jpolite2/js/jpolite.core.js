@@ -3,21 +3,67 @@
  * Applicable to module_content, helper, dynamic content ...
  */
 $.extend({
+	//Handy method based on Gritter to notify user
+	//Can be customized to other libraries
+	alert: function(msg) {
+		this.gritter.add(msg);
+	},
+
+	//Registry of controls dynamically loaded in modules
 	_widgetControls:{},
 	addControls: function(options) {	//{selector:handler}
 		this.extend(this._widgetControls, options);
 	},
 	widgetize: function() {
 		for (s in $._widgetControls) {
-			var f = $._widgetControls[s][0];
-			var p = $._widgetControls[s][1];
+			var f = $._widgetControls[s][0],
+				p = $._widgetControls[s][1];
 
-			if (p && (p.constructor == Array)) f.apply($(s, this), p);
+			if ($.isArray(p)) f.apply($(s, this), p);
 			else f.call($(s, this), p);
 		}
 	},
-	alert: function(msg) {
-		this.gritter.add(msg);
+
+	//A message regitry and handling system to handle server side messages
+	//Can be used for local messaging as well
+	_MsgRegistry: {
+		//find out what the target: header, tab#id, helper, container#id, module#id
+		jpolite: [],
+		//update content of a module
+		module: [],
+		//find out which XDO to handle, name#url
+		resource: [],
+		//show some alerts to user (after success)
+		msg: [
+			function(msg) {
+				$.alert({title:'System Notification', text:msg});
+				return true;
+			}
+		]
+	},
+	registerMsgHandlers: function(handlers) {
+		var MR = this._MsgRegistry;
+		for (var x in handlers) {
+			if (!MR[x]) MR[x]=[];
+			MR[x].push(handlers[x])
+		}
+	},
+	handleMessage: function(m) {
+		var rv = true;
+		for (var k in m) {
+			var x = this._MsgRegistry[k];
+			if (x) for (var i in x) x[i](m[k])
+		};
+		return rv;
+	},
+
+	//A global event processing mechanism for you to register and process events
+	_DOC: $(document),
+	bindEvent: function(events){
+		for (var e in events) this._DOC.bind(e, events[e]);
+	},
+	triggerEvent: function(e, data){
+		this._DOC.trigger(e, data);
 	}
 });
 
@@ -37,86 +83,115 @@ $.fn.extend({
 	}
 });
 
+function findTemplates(){
+
+};
 /*
  * JPolite Core Features and Functions
  */
 $.jpolite = {
-	_doc: $(document),
-	_MT: $("#module_template").rm(),
 	Header: $("#header"),
 	Footer: $("#footer"),
-	t1: $.fn.fadeOut,
-	t2: $.fn.fadeIn,
 	Nav: {
-		ct: false,	//Current selected tab id
-		its: null,	//Collection of tab items
-		tabs: {},	//Hash for tabs, tabs[tab_x_id] == tab_x
+		its: null,			//Collection of tab items
+		tabs: {},			//Hash for tabs, tabs[tab_x_id] == tab_x
+		c: $("#content"),	//Content
+		t1: $.fn.fadeOut,	//Content transition out function
+		t2: $.fn.fadeIn,	//Content transition in function
 
-		init: function(cts, its, func){
+		init: function(cts, its, func, p){
 			var t = this.tabs;
+			func.call($(cts), p)
 			this.its = $(its, cts).each(function(i){
 				this.modules = {};
 				t[this.id] = this;
-				func.call(this, i);
 			}).click(function(){
 				if (!$(this).on()) return;
 				$.jpolite.Nav.switchTab(this.id);
 			});
 		},
-		gotoTab: function(id) {
-			var x;
-			if (id) x = this.tabs[id];
-			if (!x) x = this.its()[0];
-			$(x).click();
-		},
 		switchTab: function(id){
-			var c = $("#content");
-			var mv = $(".module:visible");
-			var x = this.tabs[id];
-			this.ct = x;
+			var c = this.c,
+				x = this.tabs[id],
+				t1 = this.t1,
+				t2 = this.t2,
+				mv = $(".module:visible");
 			var f = function(){
 				mv.hide();
-				$.jpolite.Containers.setLayout();
-				for (i in x.modules) {
+				$.jpolite.Content.rePosition(x.id);
+				for (var i in x.modules) {
 					var m = x.modules[i];
 					$(m).show();
 					m.loadContent();
 				};
-				$.jpolite.t2.call(c, 1000);
+				t2.call(c, 900)
 			};
-
-			$.jpolite.t1.apply(c, ['slow', f]);
+			this.t1.apply(c, [500, f])
 		},
-//		addNewTab: function(id, title) {
-//			var tab = $("<li id='" + id + "'>" + title + "</li>")
-//						.appendTo(this.ht)
-//						.click(function(){$.jpolite.Nav.switchTab(this)})[0];
-//			this.tabs[id] = tab;
-//			tab.modules = {};
-//		},
+		getTab: function(id) {
+			return this.tabs[id];
+		},
 		addStaticModule: function(m, tab_id){
 			this.tabs[tab_id].modules[m.id] = m;
 		}
 	},
-	Containers: {
-		c1:$("#c1"),
-		c2:$("#c2"),
-		c3:$("#c3"),
-		setLayout: function () {
-			var c = $.jpolite.Nav.ct;
-			var x = $.extend({}, _columnLayout._default, _columnLayout[c.id]);
-			$('body').animate(x.bg);
+	Content: {
+		_MTS: {}, 		//Module Templates
+		c1: $("#c1"),
+		c2: $("#c2"),
+		c3: $("#c3"),
+		moduleActions: {
+			loadContent: function(url, forced) {
+				var x = this;
+				if (typeof url === "boolean") forced = url;
+				else url = url || x.url;
+
+				if (!url || (x.loaded && !forced)) return;
+				$(".moduleContent", this).load(url, function(){
+					$.widgetize.apply(this);
+					$.triggerEvent("moduleLoadedEvent", x);
+					x.loaded = true;
+				});
+			},
+			max: function(){
+				$(".moduleContent", this).show();
+			},
+			min: function(){
+				$(".moduleContent", this).hide();
+			},
+			close: function(){
+				$(this).rm();
+			}
+		},
+
+		init: function() {
+			var x = $(".module_template").get();
+			for (var i in x){
+				var id = x[i].id || '_default';
+				this._MTS[id] = $(x[i]).attr("class","module").rm();
+			};
+			this._MTS.get = function(id) {
+				return this[id] ? this[id] : this._default;
+			};
+			this.loadStatic();
+			this.loadLayout();
+		},
+		rePosition: function (tab_id) {
+			var x = $.extend({}, _columnLayout._default, _columnLayout[tab_id]),
+				bc = $('body').attr('class') || 'normal';
+
+			if (bc != x.bg) $('body').switchClass(bc, x.bg);
 			this.c1.attr('class',x.c1);
 			this.c2.attr('class',x.c2);
 			this.c3.attr('class',x.c3);
 		},
 		addModule: function(m) {
-			var c = this[m.c];
-			var t = $.jpolite.Nav.tabs[m.tab];
+			var c = this[m.c], t = $.jpolite.Nav.getTab(m.tab);
+
 			if (!c || !t) return;
 
-			var x = $.jpolite._MT.clone(true)[0];
-			$.extend(x, $.jpolite.moduleActions);
+			var x = this._MTS.get(m.mt).clone(true)[0];
+			$.extend(x, this.moduleActions);
 			var y = _modules[m.id];
 			x.loaded = false;
 			x.url = y.url;
@@ -128,52 +203,11 @@ $.jpolite = {
 			$(".moduleTitle", x).text(y.t);
 			if (y.c) $(x).addClass(y.c);
 			c.prepend(x);
-			if (m.tab == $.jpolite.Nav.ct.id)
-				x.loadContent();
-		}
-	},
-	moduleActions: {
-		loadContent: function(url, forced) {
-			if (url && url.constructor == Boolean) {
-				forced = url;
-				url = null;
-			}
-			var x = this;
-			var u = (url || this.url);
-			if (!u || (this.loaded && !forced)) return;
-			$(".moduleContent", this).load(u, function(){
-				$.widgetize.apply(this);
-				//$.jpolite.triggerEvent("moduleLoadedEvent", x);
-				x.loaded = true;
-			});
-		},
-		max: function(){
-			$(".moduleContent", this).show();
-		},
-		min: function(){
-			$(".moduleContent", this).hide();
-		},
-		close: function(){
-			$(this).rm();
-		}
-	},
-	Layout: {
-		// Load layout defined in modules.js
-		loadLayout: function() {
-			var l = _moduleLayout.reverse();
-
-			for (var x in l) $.jpolite.Containers.addModule(l[x]);
-		},
-		// Retrieve current layout
-		saveLayout: function() {
-			return "[" + $(".module", "#main").map(function(){
-				return "{i:'" + this.id + "',c:'" + this.parentNode.id + "',t:'" + this.tab +"'}";
-			}).get().join(",") + "]";
-		
-			return s;
+			if ($(x).is(':visible')) x.loadContent();
 		},
 		// Make DIV.module sections preloaded in the page active modules 
 		loadStatic: function(){
+			var ma = this.moduleActions;
 			$(".module").each(function(){
 				var p = this.id.split(":");	//m101:t1
 				$.extend(this, {
@@ -181,62 +215,38 @@ $.jpolite = {
 					tab: p[1],
 					url: _modules[p[0]],
 					loaded: true
-				});
-				$.extend(this, $.jpolite.moduleActions);
+				}, ma);
 				$.widgetize.apply(this);
 				$.jpolite.Nav.addStaticModule(this, p[1])
 			});
-		}
-	},
+		},
 
-	MessageRegistry: {
-		//find out what the target: header, tab#id, helper, container#id, module#id
-		jpolite: [],
-		//update content of a module
-		module: [],
-		//find out which XDO to handle, name#url
-		//show some alerts to user (after success)
-		msg: [
-			function(msg) {
-				$.alert({title:'System Notification', text:msg});
-				return true;
-			}
-		]
+		// Load layout defined in modules.js
+		loadLayout: function(url) {
+			var l = _moduleLayout.reverse();
+
+			for (var x in l) this.addModule(l[x]);
+		},
+		// Retrieve current layout
+		saveLayout: function() {
+			return "[" + $(".module", "#main").map(function(){
+				return "{id:'" + this.id + "',c:'" + this.parentNode.id + "',tab:'" + this.tab +"'}";
+			}).get().join(",") + "]";
+		}
 	},
 
 	init: function(){
-		this.Layout.loadStatic();
-		this.Layout.loadLayout();
-
-		//this.Nav.tabs['t1'].click();
+		this.Content.init();
 
 		delete this.Nav.init;
-		delete this.Layout.loadStatic;
+		delete this.Content.init;
+		delete this.Content.loadStatic;
 		delete $.jpolite.init;
 	},
-
-	registerMessageHandlers: function(handlers) {
-		var MR = this.MessageRegistry;
-		for (var obj in handlers) {
-			if (!MR[obj]) MR[obj]=[];
-			MR[obj].push(handlers[obj])
-		}
-	},
-
-	handleMessage: function(m) {
-		var rv = true;
-		for (var k in m) {
-			var x = this.MessageRegistry[k];
-			if (x) for (var i in x) x[i](m[k])
-		};
-		return rv;
-	},
-
-	bindEvent: function(events){
-		for (var e in events) $.jpolite._doc.bind(e, events[e]);
-	},
-	
-	triggerEvent: function(evt, data){
-		this._doc.trigger(evt, data);
+	gotoTab: function(id) {
+		var x;
+		if (id) x = this.Nav.tabs[id];
+		if (!x) x = this.Nav.its()[0];
+		$(x).click();
 	}
 };

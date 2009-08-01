@@ -50,7 +50,7 @@ var _modules={
  *  	 t:  "tab_id_belongs_to	(t1, t2, ...)"}
  */ 
 var _moduleLayout=[
-	{id:'m101',c:'c1',tab:'t1',mt:'B'},{id:'m102',c:'c2',tab:'t1',mt:'C'},{id:'m103',c:'c3',tab:'t1'},
+	{id:'m101',c:'c1',tab:'t1'},{id:'m102',c:'c2',tab:'t1'},{id:'m103',c:'c3',tab:'t1'},
 
 	{id:'m201',c:'c1',tab:'t2'},{id:'m202',c:'c2',tab:'t2'},{id:'m203',c:'c3',tab:'t2'},
 	{id:'m204',c:'c1',tab:'t2'},{id:'m206',c:'c2',tab:'t2'},{id:'m205',c:'c3',tab:'t2'},
@@ -82,8 +82,10 @@ var _columnLayout = {
 	_default: { bg:'haha',
 				c1:'span-8',
 				c2:'span-8',
-				c3:'span-8 last'
+				c3:'span-8 last',
+				c4:'span-24 last'
 	},
+	t1:{c4:'span-12'},
 	t2:{ bg:'hehe',
 		 c1:'span-8',
 		 c2:'span-8',
@@ -97,7 +99,10 @@ var _columnLayout = {
 	t4:{ c1:'span-6',
 		 c2:'span-18 last',
 		 c3:'hide'
-
+	},
+	t6:{ c1:'span-24 last',
+		 c2:'span-24 last',
+		 c3:'hide'
 	},
 	t8:{ c1:'span-24',
 		 c2:'span-8',

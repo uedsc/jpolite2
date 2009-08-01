@@ -12,7 +12,7 @@ $.fn.extend({
 		return this.each(function() {
 			var x = $(this);
 			var targets = x.children("div").addClass("tabsdiv").hide();
-	
+
 			x.children(".tabsul").children("li").each(function(i) {
 				this.target = targets[i];
 				$(this).click(function() {
@@ -213,16 +213,17 @@ $(function(){
 	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
 	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
-	var customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks\n2 - LavaLamp\n3 - 'Traditional'");
+	var customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'");
 	switch (customNav) {
 	case	'1':
-			$.jpolite.Nav.init("#header_tabs", "li", $.fn.kwicks, {max:180, spacing:5, sticky:true, event:'click'});
+			$("li", "#header_tabs").css({width:'80px', padding:0, textAlign:'center'});
+			$.jpolite.Nav.init("#header_tabs", "li", $.fn.kwicks, {max:120, spacing:5, sticky:true, event:'click'});
 			break;
 	case	'2':
 			//Just a little cusomization to the appearance of tabs
 			$("li", "#header_tabs").css({background:"transparent", border:0})
-			$("#header_tabs").prepend("<li class='backLava'></li>")
-			$.jpolite.Nav.init("#header_tabs", "li", $.fn.lavaLamp, {startItem:1});
+			//$("#header_tabs").prepend("<li class='backLava'></li>")
+			$.jpolite.Nav.init("#header_tabs", "li", $.fn.lavaLamp, {startItem:0, speed:800});
 			break;
 	default:
 			$.jpolite.Nav.init("#header_tabs", "li", TraditionalTabs);

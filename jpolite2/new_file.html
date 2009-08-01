@@ -3,13 +3,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 		<title>Untitled Document</title>
+		<link rel="stylesheet" href="css/style.css" title="grayscale" type="text/css" rel="stylesheet" media="screen, projection" />
 		<script src="js/jquery.js"></script>
+		<script src="js/jquery-ui-1.7.2.custom.min.js"></script>
 		<script>
 			var x = {};
 			var a = true;
-			
-			alert(typeof c);
-			alert(a.constructor);
+
 			for (i = 0; i < 1000; i++) x['a' + i] = 0;
 
 			$.extend({
@@ -37,12 +37,20 @@
 				for (var i = 0; i < 100000; i++)
 					$.bb();
 			};
+			function t4() {
+				$('body').switchClass('haha', 'hoho')
+			}
+			function t5() {
+				$('body').switchClass('hoho', 'haha')
+			}
 		</script>
 	</head>
-	<body>
+	<body class='haha'>
 		<input type="button" onclick="test(t1)" value="t1"/>
 		<input type="button" onclick="test(t2)" value="t2"/>
 		<input type="button" onclick="test(t3)" value="t3"/>
+		<input type="button" onclick="test(t4)" value="t4"/>
+		<input type="button" onclick="test(t5)" value="t5"/>
 		<div id="result"></div>
 	</body>
 </html>

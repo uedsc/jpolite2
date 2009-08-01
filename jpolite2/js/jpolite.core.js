@@ -83,9 +83,6 @@ $.fn.extend({
 	}
 });
 
-function findTemplates(){
-
-};
 /*
  * JPolite Core Features and Functions
  */
@@ -101,19 +98,18 @@ $.jpolite = {
 
 		init: function(cts, its, func, p){
 			var t = this.tabs;
-			func.call($(cts), p)
+			func.call($(cts), p);
 			this.its = $(its, cts).each(function(i){
 				this.modules = {};
 				t[this.id] = this;
 			}).click(function(){
 				if (!$(this).on()) return;
 				$.jpolite.Nav.switchTab(this.id);
-			});
+			})
 		},
 		switchTab: function(id){
 			var c = this.c,
 				x = this.tabs[id],
-				t1 = this.t1,
 				t2 = this.t2,
 				mv = $(".module:visible");
 			var f = function(){
@@ -137,14 +133,16 @@ $.jpolite = {
 	},
 	Content: {
 		_MTS: {}, 		//Module Templates
-		c1: $("#c1"),
-		c2: $("#c2"),
-		c3: $("#c3"),
+//		c1: $("#c1"),
+//		c2: $("#c2"),
+//		c3: $("#c3"),
 		moduleActions: {
 			loadContent: function(url, forced) {
 				var x = this;
-				if (typeof url === "boolean") forced = url;
-				else url = url || x.url;
+				if (typeof url === "boolean") {
+					forced = url;
+					url = x.url;
+				} else url = url || x.url;
 
 				if (!url || (x.loaded && !forced)) return;
 				$(".moduleContent", this).load(url, function(){
@@ -165,8 +163,11 @@ $.jpolite = {
 		},
 
 		init: function() {
-			var x = $(".module_template").get();
-			for (var i in x){
+			var x = $("div#[id^=c]").get();
+			for (var i in x) this[x[i].id] = $(x[i]);
+
+			x = $(".module_template").get();
+			for (i in x){
 				var id = x[i].id || '_default';
 				this._MTS[id] = $(x[i]).attr("class","module").rm();
 			};
@@ -181,9 +182,8 @@ $.jpolite = {
 				bc = $('body').attr('class') || 'normal';
 
 			if (bc != x.bg) $('body').switchClass(bc, x.bg);
-			this.c1.attr('class',x.c1);
-			this.c2.attr('class',x.c2);
-			this.c3.attr('class',x.c3);
+			delete x.bg;
+			for (var c in x) this[c].attr('class', x[c]);
 		},
 		addModule: function(m) {
 			var c = this[m.c], t = $.jpolite.Nav.getTab(m.tab);

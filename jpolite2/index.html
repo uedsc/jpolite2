@@ -21,12 +21,12 @@
 	<div id="title">A Lightweight Portal Framework based on jQuery</div>
 	<ul id="header_tabs">
 		<li id="t1">About V2</li>
-		<li id="t2">Components</li>
-		<li id="t3">Layout</li>
+		<li id="t2">Layout</li>
+		<li id="t3">Module</li>
 		<li id="t4">Controls</li>
 		<li id="t5">Extras</li>
 		<li id="t6">Download</li>
-		<li id="t7">RSS Reader</li>
+		<li id="t7">XDO</li>
 		<li id="t8">jQuery UI</li>
 	</ul>
 	<div id="info_bar"><div id="loading"><img src="image/loading.gif" alt="loading"/></div>
@@ -38,28 +38,12 @@
 	</div>
 </div>
 
-<div id="content" class="container showgridx">
+<div id="content" class="container">
 	<div id="c1">
 		<div id="m201:t2" class="module">
 			<div class="moduleFrame">
 				<div class="moduleHeader">
 					<div class="moduleTitle">Module:m201</div>
-					<div class='moduleActions'>
-						<b title="Refresh" class="actionRefresh"></b>
-						<b title="Collapse" class="actionMin"></b>
-						<b title="Expand" class="actionMax"></b>
-						<b title="Close" class="actionClose"></b>
-					</div>
-				</div>
-				<div class="moduleContent">
-					<img src="image/loading.gif" alt="Loading..."/> Loading...
-				</div>
-			</div>
-		</div>
-		<div id="m204:t2" class="module">
-			<div class="moduleFrame">
-				<div class="moduleHeader">
-					<div class="moduleTitle">Module:m204</div>
 					<div class='moduleActions'>
 						<b title="Refresh" class="actionRefresh"></b>
 						<b title="Collapse" class="actionMin"></b>
@@ -120,38 +104,6 @@
 				</div>
 			</div>
 		</div>
-		<div id="m700:t7" class="module">
-			<div class="moduleFrame">
-				<div class="moduleHeader">
-					<div class="moduleTitle">RSSLi Menu (m700)</div>
-					<div class='moduleActions'>
-						<b title="Refresh" class="actionRefresh"></b>
-						<b title="Collapse" class="actionMin"></b>
-						<b title="Expand" class="actionMax"></b>
-						<b title="Close" class="actionClose"></b>
-					</div>
-				</div>
-				<div class="moduleContent">
-					<img src="image/loading.gif" alt="Loading..."/> Loading...
-				</div>
-			</div>
-		</div>
-		<div id="m801:t7" class="module">
-			<div class="moduleFrame">
-				<div class="moduleHeader">
-					<div class="moduleTitle">CNN.com US</div>
-					<div class='moduleActions'>
-						<b title="Refresh" class="actionRefresh"></b>
-						<b title="Collapse" class="actionMin"></b>
-						<b title="Expand" class="actionMax"></b>
-						<b title="Close" class="actionClose"></b>
-					</div>
-				</div>
-				<div class="moduleContent">
-					<img src="image/loading.gif" alt="Loading..."/> Loading...
-				</div>
-			</div>
-		</div>
 		<div id="m601:t6" class="module">
 			<div class="moduleFrame">
 				<div class="moduleHeader">
@@ -185,8 +137,8 @@
 			</div>
 		</div>
 	</div>
-	<div id="c2"><div class="module" id="m102:t2">yy</div></div>
-	<div id="c3"><div class="module" id="m103:t3">zz</div></div>
+	<div id="c2"></div>
+	<div id="c3"></div>
 	<div id="c4"></div>
 </div>
 
@@ -212,17 +164,33 @@ Copyright 2009 (C) Trilancer.com
 		</div>
 	</div>
 </div>
-<div class="module_template" id="B"><!-- The ID 'B' will be used as the index to match all module layout definition whose mt:'B' -->
-	<div class="moduleFrame" style="border-width:6px 2px 2px 6px">
+<div class="module_template" id="B"><!-- The ID 'B' will be used as the index to match all module layout definition with mt:'B' -->
+	<div class="moduleFrame" style="border-color:red; border-width:6px; border-style:groove;">
 		<div class='moduleContent'>
 			<img src="image/loading.gif" alt="Loading..."/> Loading...
 		</div>
+		<div class='moduleHeader'>
+			<div class='moduleTitle'></div>
+			<div class='moduleActions'>
+				<b title="Collapse" class="actionMin"></b>
+				<b title="Expand" class="actionMax"></b>
+				<b title="Close" class="actionClose"></b>
+			</div>
+		</div>
 	</div>
 </div>
-<div class="module_template" id="C"><!-- The ID 'C' will be used as the index to match all module layout definition whose mt:'C' -->
-	<div class="moduleFrame" style="border-width:6px; border-style:double">
+<div class="module_template" id="C"><!-- The ID 'C' will be used as the index to match all module layout definition with mt:'C' -->
+	<div class="moduleFrame" style="border-color:green; border-width:6px; border-style:double">
 		<div class='moduleContent'>
 			<img src="image/loading.gif" alt="Loading..."/> Loading...
+		</div>
+		<div class='moduleHeader'>
+			<div class='moduleTitle'></div>
+			<div class='moduleActions'>
+				<b title="Collapse" class="actionMin"></b>
+				<b title="Expand" class="actionMax"></b>
+				<b title="Close" class="actionClose"></b>
+			</div>
 		</div>
 	</div>
 </div>

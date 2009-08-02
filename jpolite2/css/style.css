@@ -31,7 +31,7 @@ body {margin:0;padding:0;background:#eee}
 #title {display:none; padding-left:160px; color:#fff; font-size:1.5em; height:50px; line-height:50px; font-weight:bold; font-style:italic}
 #loading {display:none}
 
-#info_bar {clear:left; color:#aaa; background-color:#fefefe; border-top:1px solid #bbb; padding:4px 6px; margin-top:15px; overflow:hidden; height:1.2em}
+#info_bar {clear:left; color:#aaa; background-color:#fff; border-top:1px solid #bbb; padding:4px 6px; margin-top:15px; overflow:hidden; height:1.2em}
 #info_bar span img {cursor:pointer}
 #info_bar .hint {display:none;padding-right:5px}
 #info_bar:hover .hint {display:inline}
@@ -109,6 +109,6 @@ body {margin:0;padding:0;background:#eee}
 /*               FOOTER               */
 /**************************************/
 #footer {margin:1em auto; border:1px solid #bbb; color:#777; bottom:0; width:950px; height:5em; background:#f7f7f7; text-align:center; -moz-box-shadow: 0pt 0pt 1em #bbb;}
-#footer_bar {color:#999; border-bottom:1px solid #ccc; padding:4px 6px; height:1.2em; margin-bottom:10px}
+#footer_bar {color:#999; border-bottom:1px solid #ccc; padding:4px 6px; height:1.2em; margin-bottom:10px; background:#fff}
 #footer_bar a {color:#999}
 #footer_bar a:hover {color:#333}

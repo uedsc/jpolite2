@@ -7,20 +7,17 @@
  */ 
 var _modules={
 	m101:{url:"modules/m101.html",	t:"Motivation", c:"red"},
-	m181:{url:"modules/m101.html",	t:"Motivation", c:"red"},
 	m102:{url:"modules/m102.html",	t:"Philisophy", c:"yellow"},
 	m103:{url:"modules/m103.html",	t:"Buzz", c:"green"},
 
-	m201:{url:"modules/m201.html",	t:"Module:m201"},
-	m202:{url:"modules/m202.html",	t:"Module:m202"},
-	m203:{url:"modules/m203.html",	t:"Module:m203"},
-	m204:{url:"modules/m204.html",	t:"Module:m204"},
-	m205:{url:"modules/m205.html",	t:"Module:m205"},
-	m206:{url:"modules/m206.html",	t:"Module:m206"},
+	m200:{url:"modules/m200.html",	t:"Layout Width"},
+	m201:{url:"modules/m201.html",	t:"Module Definition"},
+	m202:{url:"modules/m202.html",	t:"Module Layout Definition"},
+	m203:{url:"modules/m203.html",	t:"Column Layout Definition"},
 
-	m301:{url:"modules/m301.html",	t:"Module Definition (m301)"},
-	m302:{url:"modules/m302.html",	t:"Layout Definition (m302)"},
-	m303:{url:"modules/m303.html",	t:"Column Width Definition (m303)", c:"green"},
+	m301:{url:"modules/m301.html",	t:"About Module Template Customization"},
+	m302:{url:"modules/m302.html",	t:"Custom Module Template B"},
+	m303:{url:"modules/m303.html",	t:"Custom Module Template C"},
 
 	m400:{url:"modules/m400.html",	t:"Side Menu (m400)"},
 	m401:{url:"modules/m401.html",	t:"Tabs Control (m401)"},
@@ -35,9 +32,7 @@ var _modules={
 	m601:{url:"modules/m601.html",	t:"Resources & Credit"},
 	m602:{url:"modules/m602.html",	t:"License"},
 
-	m700:{url:"modules/m700.html",	t:"RSSLi Menu (m700)"},
-	m701:{url:"modules/m701.html",	t:"RSS Reader (m701)"},
-	m702:{url:"rss.php?q=http%3A%2F%2Frss.msnbc.msn.com%2Fid%2F3032091%2Fdevice%2Frss%2Frss.xml",	t:"MSNBC - Static RSS Module (m702)"},
+	m700:{url:"modules/m700.html",	t:"XML Data Object"},
 	
 	m801:{url:"modules/m801.html",	t:"jQuery UI Controls with Theme Support"}
 };
@@ -52,10 +47,11 @@ var _modules={
 var _moduleLayout=[
 	{id:'m101',c:'c1',tab:'t1'},{id:'m102',c:'c2',tab:'t1'},{id:'m103',c:'c3',tab:'t1'},
 
-	{id:'m201',c:'c1',tab:'t2'},{id:'m202',c:'c2',tab:'t2'},{id:'m203',c:'c3',tab:'t2'},
-	{id:'m204',c:'c1',tab:'t2'},{id:'m206',c:'c2',tab:'t2'},{id:'m205',c:'c3',tab:'t2'},
+	{id:'m200',c:'c1',tab:'t2'},
+	{id:'m201',c:'c2',tab:'t2'},{id:'m202',c:'c3',tab:'t2'},{id:'m203',c:'c4',tab:'t2'},
 
-	{id:'m301',c:'c1',tab:'t3'},{id:'m302',c:'c2',tab:'t3'},{id:'m303',c:'c3',tab:'t3'},
+	{id:'m301',c:'c1',tab:'t3'},
+	{id:'m302',c:'c2',tab:'t3',mt:'B'},{id:'m303',c:'c3',tab:'t3',mt:'C'},
 
 	{id:'m400',c:'c1',tab:'t4'},{id:'m401',c:'c2',tab:'t4'},
 
@@ -64,8 +60,8 @@ var _moduleLayout=[
 	{id:'m601',c:'c1',tab:'t6'},
 	{id:'m602',c:'c1',tab:'t6'},
 
-	{id:'m700',c:'c1',tab:'t7'},{id:'m701',c:'c2',tab:'t7'},
-								{id:'m702',c:'c2',tab:'t7'},
+	{id:'m700',c:'c1',tab:'t7'},
+
 	{id:'m801',c:'c1',tab:'t8'}
 ];
 
@@ -83,18 +79,19 @@ var _columnLayout = {
 				c1:'span-8',
 				c2:'span-8',
 				c3:'span-8 last',
-				c4:'span-24 last'
+				c4:'span-24'
 	},
 	t1:{c4:'span-12'},
 	t2:{ bg:'hehe',
-		 c1:'span-8',
+		 c1:'span-24 last',
 		 c2:'span-8',
-		 c3:'span-8 last'
+		 c3:'span-8',
+		 c4:'span-8 last'
 	},
 	t3:{ bg:'hoho',
-		 c1:'span-12',
-		 c2:'span-12 last',
-		 c3:'span-24'
+		 c1:'span-24',
+		 c2:'span-12',
+		 c3:'span-12 last'
 	},
 	t4:{ c1:'span-6',
 		 c2:'span-18 last',
@@ -103,6 +100,8 @@ var _columnLayout = {
 	t6:{ c1:'span-24 last',
 		 c2:'span-24 last',
 		 c3:'hide'
+	},
+	t7:{ c1:'span-24 last'
 	},
 	t8:{ c1:'span-24',
 		 c2:'span-8',

@@ -1,2 +1,26 @@
-<p><b>DOCTYPE</b> is omitted, but the markup should be consistent with that of <b>index.html</b>.</p>
-<p>The content is in <a href="m203.html" rel="new"><b>m203.html</b></a><p>
+<p>Lastly, define <b>class</b> of the columns for the tabs in <b>_columnLayout</b> variable, e.g.,<br>
+<pre>
+...
+_default: {
+	bg:'haha',
+	c1:'span-8',
+	c2:'span-8',
+	c3:'span-8 last',
+	c4:'span-24 last'
+},
+t1:{c4:'span-12'},
+t2:{	bg:'hehe',
+	c1:'span-8',
+	c2:'span-16 last',
+	c3:'hide'
+},
+...
+</pre>
+
+<ul>
+	<li><b>_default</b> - default class definitions of columns</li>
+	<li><b>t2, t3</b> - class definitions for a given tab</li>
+	<li><b>bg</b> - class definition for <b>body</b>, which will be switched when changing tab</li>
+	<li><b>c1, c2, c3</b> - column class definitions</li>
+</ul>
+</p>

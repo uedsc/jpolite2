@@ -66,6 +66,16 @@ $.fn.extend({
 			},"json");
 			return false;
 		});
+	},
+
+	//Apply on UL.menu, when clicked, replace the visible module in a column with another 
+	SideMenu: function() {
+		return this.each(function(){
+			$(this).children().click(function(){
+				var m = $("a", this)[0].rel;
+				$.jpolite.replaceModule('c2', m)
+			})
+		})
 	}
 });
 
@@ -92,7 +102,7 @@ function myLiveEvents(){
 		return false;
 	});
 	$("a.local").live("click", function(){
-		$(this).parents(".module")[0].loadContent(this.href);
+		$(this).parents(".module")[0].loadContent(this.href, true);
 		return false;	
 	});	
 };
@@ -158,6 +168,7 @@ function myControls(){
 		".accordion":	[$.fn.Accordion],
 		".maccordion":	[$.fn.MAccordion],
 		".jsonform":	[$.fn.JsonForm],
+		".menu":		[$.fn.SideMenu],
 
 		//jqModal controls, One object as arguement
 		".jqmWindow":	[$.fn.jqm, {toTop:true}],

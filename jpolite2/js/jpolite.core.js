@@ -15,6 +15,7 @@ $.extend({
 		this.extend(this._widgetControls, options);
 	},
 	widgetize: function() {
+		$("a[href^=http]", this).attr("target", "_blank");
 		for (s in $._widgetControls) {
 			var f = $._widgetControls[s][0],
 				p = $._widgetControls[s][1];
@@ -92,6 +93,7 @@ $.jpolite = {
 	Nav: {
 		its: null,			//Collection of tab items
 		tabs: {},			//Hash for tabs, tabs[tab_x_id] == tab_x
+		ct:	null,			//Current tab id
 		c: $("#content"),	//Content
 		t1: $.fn.fadeOut,	//Content transition out function
 		t2: $.fn.fadeIn,	//Content transition in function
@@ -122,6 +124,7 @@ $.jpolite = {
 				};
 				t2.call(c, 900)
 			};
+			this.ct = id;
 			this.t1.apply(c, [500, f])
 		},
 		getTab: function(id) {
@@ -129,6 +132,9 @@ $.jpolite = {
 		},
 		addStaticModule: function(m, tab_id){
 			this.tabs[tab_id].modules[m.id] = m;
+		},
+		removeModule: function(m){
+			delete this.tabs[m.tab].modules[m.id];
 		}
 	},
 	Content: {
@@ -151,14 +157,11 @@ $.jpolite = {
 					x.loaded = true;
 				});
 			},
-			max: function(){
-				$(".moduleContent", this).show();
-			},
-			min: function(){
-				$(".moduleContent", this).hide();
-			},
+			max: function(){ $(".moduleContent", this).show() },
+			min: function(){ $(".moduleContent", this).hide() },
 			close: function(){
 				$(this).rm();
+				$.jpolite.Nav.removeModule(this)
 			}
 		},
 
@@ -168,7 +171,7 @@ $.jpolite = {
 				handle: '.moduleHeader',
 				placeholder: 'ui-sortable-placeholder',
 				revert: true
-			}).disableSelection()
+			})//.disableSelection()
 			.get();
 			for (var i in x) this[x[i].id] = $(x[i]);
 
@@ -209,6 +212,7 @@ $.jpolite = {
 			$(".moduleTitle", x).text(y.t);
 			if (y.c) $(x).addClass(y.c);
 			c.prepend(x);
+			if (m.tab == $.jpolite.Nav.ct) $(x).show();
 			if ($(x).is(':visible')) x.loadContent();
 		},
 		// Make DIV.module sections preloaded in the page active modules 
@@ -254,5 +258,14 @@ $.jpolite = {
 		if (id) x = this.Nav.tabs[id];
 		if (!x) x = this.Nav.its()[0];
 		$(x).click();
+	},
+	replaceModule: function(col, id) {
+		var x = $(".module:visible", this.Content[col]).get();
+		for (var i in x) x[i].close();
+		this.Content.addModule({
+			id: id,
+			c: col,
+			tab: this.Nav.ct
+		})
 	}
 };

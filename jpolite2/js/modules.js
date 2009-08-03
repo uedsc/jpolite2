@@ -19,9 +19,13 @@ var _modules={
 	m302:{url:"modules/m302.html",	t:"Custom Module Template B"},
 	m303:{url:"modules/m303.html",	t:"Custom Module Template C"},
 
-	m400:{url:"modules/m400.html",	t:"Side Menu (m400)"},
-	m401:{url:"modules/m401.html",	t:"Tabs Control (m401)"},
-	m402:{url:"modules/m402.html",	t:"Accordion Control (m402)"},
+	m400:{url:"modules/m400.html",	t:"Side Menu"},
+	m401:{url:"modules/m401.html",	t:"Tabs Control"},
+	m402:{url:"modules/m402.html",	t:"Accordion Control"},
+	m403:{url:"modules/m403.html",	t:"Local Link"},
+	m404:{url:"modules/m404.html",	t:"Tab Link"},
+	m405:{url:"modules/m405.html",	t:"How to integrate jQuery UI Plugins"},
+	m406:{url:"modules/m406.html",	t:"Example: jqModal"},
 	
 	m500:{url:"modules/m500.html",	t:"Some Goodies (m500)"},
 	m501:{url:"modules/m501.html",	t:"Local Link (m501)"},
@@ -33,7 +37,7 @@ var _modules={
 	m602:{url:"modules/m602.html",	t:"License"},
 
 	m700:{url:"modules/m700.html",	t:"XML Data Object"},
-	
+
 	m801:{url:"modules/m801.html",	t:"jQuery UI Controls with Theme Support"}
 };
 

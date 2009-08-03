@@ -106,7 +106,9 @@ body {margin:0;padding:0;background:#eee}
 .accordion dt.on {background:url(g/tabon.gif) repeat-x; color:#333}
 .accordion dd {background:#fff; overflow-x:auto; padding:3px; border-width:0px 1px 1px 1px; border-style:solid; border-color:#bbb; display:none}
 
-
+.menu li {cursor:pointer}
+.menu li:hover {background:#ddd}
+.menu li.on {background:#aaa}
 /**************************************/
 /*               FOOTER               */
 /**************************************/

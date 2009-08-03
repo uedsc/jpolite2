@@ -213,7 +213,7 @@ $(function(){
 	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
 	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
-	var customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'");
+	var customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
 	switch (customNav) {
 	case	'1':
 			$("li", "#header_tabs").css({width:'80px', padding:0, textAlign:'center'});

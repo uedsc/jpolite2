@@ -61,6 +61,8 @@ body {margin:0;padding:0;background:#eee}
 	 */
 }
 .module_template {display:none}
+.cc {padding-bottom:20px}
+.ui-sortable-placeholder { margin:10px 0; border: 1px dotted #f00; background:#faa; visibility: visible !important; height: 20px !important}
 
 /* Module Components */
 .module {background:#fff; border:1px solid #ddd; margin:10px 0; display:none;  -moz-box-shadow: 0pt 0pt 1em #bbb}

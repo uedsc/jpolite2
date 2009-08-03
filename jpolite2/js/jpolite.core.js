@@ -163,7 +163,13 @@ $.jpolite = {
 		},
 
 		init: function() {
-			var x = $("div#[id^=c]").get();
+			var x = $("#content > div").sortable({
+				connectWith: '.cc',
+				handle: '.moduleHeader',
+				placeholder: 'ui-sortable-placeholder',
+				revert: true
+			}).disableSelection()
+			.get();
 			for (var i in x) this[x[i].id] = $(x[i]);
 
 			x = $(".module_template").get();
@@ -183,7 +189,7 @@ $.jpolite = {
 
 			if (bc != x.bg) $('body').switchClass(bc, x.bg);
 			delete x.bg;
-			for (var c in x) this[c].attr('class', x[c]);
+			for (var c in x) this[c].attr('class', 'cc ' + x[c]);
 		},
 		addModule: function(m) {
 			var c = this[m.c], t = $.jpolite.Nav.getTab(m.tab);

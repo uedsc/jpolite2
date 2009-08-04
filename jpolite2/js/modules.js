@@ -26,10 +26,11 @@ var _modules={
 	m404:{url:"modules/m404.html",	t:"Tab Link"},
 	m405:{url:"modules/m405.html",	t:"How to integrate jQuery UI Plugins"},
 	m406:{url:"modules/m406.html",	t:"Example: jqModal"},
+	m407:{url:"modules/m407.html",	t:"jQuery UI Controls with Theme Support"},
 	
-	m500:{url:"modules/m500.html",	t:"Some Goodies (m500)"},
-	m501:{url:"modules/m501.html",	t:"Local Link (m501)"},
-	m502:{url:"modules/m502.html",	t:"Ajax Forms (m502)"},
+	m500:{url:"modules/m500.html",	t:"Customization Guide"},
+	m501:{url:"modules/m501.html",	t:"Customize Navigation Tabs"},
+	m502:{url:"modules/m502.html",	t:"Customize Module Layout"},
 	m503:{url:"modules/m503.html",	t:"Tab Link (m503)"},
 	m504:{url:"modules/m504.html",	t:"Thick Box (m504)"},
 
@@ -98,6 +99,10 @@ var _columnLayout = {
 		 c3:'span-12 last'
 	},
 	t4:{ c1:'span-6',
+		 c2:'span-18 last',
+		 c3:'hide'
+	},
+	t5:{ c1:'span-6',
 		 c2:'span-18 last',
 		 c3:'hide'
 	},

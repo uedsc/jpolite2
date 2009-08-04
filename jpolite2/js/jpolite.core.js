@@ -167,6 +167,12 @@ $.jpolite = {
 
 		init: function() {
 			var x = $("#content > div").sortable({
+				start: function(){
+					$(".cc").addClass("dragging")
+				},
+				stop:  function(){
+					$(".cc").removeClass("dragging")
+				},
 				connectWith: '.cc',
 				handle: '.moduleHeader',
 				placeholder: 'ui-sortable-placeholder',
@@ -259,13 +265,14 @@ $.jpolite = {
 		if (!x) x = this.Nav.its()[0];
 		$(x).click();
 	},
-	replaceModule: function(col, id) {
+	replaceModule: function(col, ids) {
 		var x = $(".module:visible", this.Content[col]).get();
 		for (var i in x) x[i].close();
-		this.Content.addModule({
-			id: id,
-			c: col,
-			tab: this.Nav.ct
-		})
+		for (i in ids)
+			this.Content.addModule({
+				id: ids[i],
+				c: col,
+				tab: this.Nav.ct
+			})
 	}
 };

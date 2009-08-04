@@ -61,7 +61,8 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 	 */
 }
 .module_template {display:none}
-.cc {padding-bottom:20px}
+.cc {padding-bottom:1px}
+.dragging {padding-bottom:20px; background:#fee}
 .ui-sortable-placeholder {margin:10px 0; border: 1px dotted #f00; background:#faa; visibility: visible !important; height: 20px !important}
 
 /* Module Components */
@@ -98,7 +99,7 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 /**************************************/
 /* Tabs Control */
 .tabs {border:1px solid #ccc}
-.tabsul {overflow:hidden;;padding-top:1px;background:#ccc; list-style-type:none; margin:0}
+.tabsul {overflow:hidden;padding-top:1px;background:#ccc; list-style-type:none; margin:0}
 .tabsul li {float:left; font-weight:bold; color:#777; background:#fff; border:1px solid #bbb; text-align:center; margin-left:2px; padding:4px 6px; cursor:pointer; white-space:nowrap}
 .tabsul li:hover {background:#f0f0f0;color:#333}
 .tabsul li.on {background:#fff url(g/tabon.gif) repeat-x; border-bottom-color:#fff; color:#333; padding-bottom:6px}
@@ -111,7 +112,9 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 .accordion dt.on {background:url(g/tabon.gif) repeat-x; color:#333}
 .accordion dd {background:#fff; overflow-x:auto; padding:3px; border-width:0px 1px 1px 1px; border-style:solid; border-color:#bbb; display:none}
 
-
+.menu li {cursor:pointer}
+.menu li:hover {background:#ddd}
+.menu li.on {background:#aaa}
 /**************************************/
 /*               FOOTER               */
 /**************************************/

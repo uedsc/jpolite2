@@ -72,7 +72,7 @@ $.fn.extend({
 	SideMenu: function() {
 		return this.each(function(){
 			$(this).children().click(function(){
-				var m = $("a", this)[0].rel;
+				var m = $("a", this)[0].rel.split(":");
 				$.jpolite.replaceModule('c2', m)
 			})
 		})
@@ -115,6 +115,13 @@ function myCustomEvents(){
 		"moduleLoadedEvent": function(e, target){
 			$.alert({title:'module Loaded',text:target.url})
 		}
+	});
+
+	//Ajax Start & Stop event processor registered with jQuery's methods
+	$("#loading").ajaxStart(function(){
+	   $(this).show();
+	}).ajaxStop(function(){
+	   $(this).hide();
 	})
 };
 

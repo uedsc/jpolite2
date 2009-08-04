@@ -1,27 +1,16 @@
-<p>Go to <a href="m501.html" class="local">Local Link</a> Module</p>
+<h4>Grid System</h4>
+<p>JPolite 2 makes use of <a href="http://bluetrip.org/">BlueTrip CSS framework</a>'s grid system,
+that the layout of the columns can be best set as grid classes, e.g., 'span-6', 'span-12 last' ...
+In that way you can easily and elegently arrange the layout of columns
+</p>
 
-<p>Forms in the framework without specially treatment will affect on the entire when submitted. A form with a <b>class="ajaxform1"</b> will be automatically turned into an AJAX form when loaded. And when submitted, the result will replace current module.</p>
+<p>The width of the container is 950px by default, and you can change that by changing <b>#content</b>
+element in <b>style.css</b></p>
 
-<p><br/>AJAX Form 1 Example:</p>
-<form name="input" action="echo.php" method="get" class="ajaxform1">
-Type your first name:
-<input type="text" name="FirstName" value="Mickey" size="20"/>
-<br/>
-Type your last name:
-<input type="text" name="LastName" value="Mouse" size="20"/>
-<br/>
-<input type="submit" value="Submit"/>
-</form>
+<p>Further setting details can be found under "<a href="#" class="tab" rel="t2">Layout</a>" tab.</p>
 
+<h4>Feature Under Development</h4>
+<p class="notice">Modules within a column can also have grid layout styles applied, but that'll require
+some intelligence built into the columns. Currently this feature is not of top priority, but I'll re-consider
+according to requests.</p> 
 
-<p><br/>Another AJAX Form (<b>class="ajaxform2"</b>), when submitted, the returned results will replace a DIV.result section embedded in the form.</p>
-<form name="input" action="echo.php" method="get" class="ajaxform2">
-Type your first name:
-<input type="text" name="FirstName" value="Mickey" size="20"/>
-<br/>
-Type your last name:
-<input type="text" name="LastName" value="Mouse" size="20"/>
-<br/>
-<input type="submit" value="Submit"/>
-<div class="result" style="background:#7f7; padding:1em">Return result goes here!</div>
-</form>

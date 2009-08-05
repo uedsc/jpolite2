@@ -30,16 +30,18 @@ var _modules={
 	
 	m500:{url:"modules/m500.html",	t:"Customization Guide"},
 	m501:{url:"modules/m501.html",	t:"Customize Navigation Tabs"},
-	m502:{url:"modules/m502.html",	t:"Customize Module Layout"},
-	m503:{url:"modules/m503.html",	t:"Tab Link (m503)"},
-	m504:{url:"modules/m504.html",	t:"Thick Box (m504)"},
+	m502:{url:"modules/m502.html",	t:"Customize Content Layout"},
+	m503:{url:"modules/m503.html",	t:"Customize Module"},
+	m504:{url:"modules/m504.html",	t:"Customize Tab Background"},
+	m505:{url:"modules/m505.html",	t:"Customize Themes"},
+	m506:{url:"modules/m506.html",	t:"Customize Features"},
 
-	m601:{url:"modules/m601.html",	t:"Resources & Credit"},
-	m602:{url:"modules/m602.html",	t:"License"},
+	m601:{url:"modules/m601.html",	t:"Message Processing"},
 
 	m700:{url:"modules/m700.html",	t:"XML Data Object"},
 
-	m801:{url:"modules/m801.html",	t:"jQuery UI Controls with Theme Support"}
+	m801:{url:"modules/m801.html",	t:"Resources & Credits"},
+	m802:{url:"modules/m802.html",	t:"License"}
 };
 
 /*
@@ -63,11 +65,11 @@ var _moduleLayout=[
 	{id:'m500',c:'c1',tab:'t5'},{id:'m501',c:'c2',tab:'t5'},
 
 	{id:'m601',c:'c1',tab:'t6'},
-	{id:'m602',c:'c1',tab:'t6'},
 
 	{id:'m700',c:'c1',tab:'t7'},
 
-	{id:'m801',c:'c1',tab:'t8'}
+	{id:'m801',c:'c1',tab:'t8'},
+	{id:'m802',c:'c1',tab:'t8'}
 ];
 
 /* 
@@ -80,25 +82,25 @@ var _moduleLayout=[
  * A _default value set is provided, to save your efforts of setting each tab manually
  */
 var _columnLayout = {
-	_default: { bg:'haha',
+	_default: { bg:'normal',
 				c1:'span-8',
 				c2:'span-8',
 				c3:'span-8 last',
 				c4:'span-24'
 	},
-	t1:{c4:'span-12'},
-	t2:{ bg:'hehe',
+	t2:{ bg:'darker',
 		 c1:'span-24 last',
 		 c2:'span-8',
 		 c3:'span-8',
 		 c4:'span-8 last'
 	},
-	t3:{ bg:'hoho',
+	t3:{ bg:'dark',
 		 c1:'span-24',
 		 c2:'span-12',
 		 c3:'span-12 last'
 	},
-	t4:{ c1:'span-6',
+	t4:{ bg:'lighter',
+		 c1:'span-6',
 		 c2:'span-18 last',
 		 c3:'hide'
 	},

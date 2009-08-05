@@ -1,27 +1,31 @@
 <p>An experimental RESTful data presentation layer, powered by Chain.js library.</p>
 
-<a href="#" onclick="$('#xxxx').jqmShow()">Show Form</a>
-<div class="jqmWindow" id="xxxx">
-<form class="jsonform"><fieldset><legend>Form</legend>
-<div><label>XXX: <input/></label></div>
-	<input type="button" onclick="test()" value="Test Message Handling"/>
-</fieldset></form>
-</div>
+<button onclick="test2()">Load Resourcess &amp; Show</button>
+<hr/>
 
 <table>
-	<thead>
-	<tr><td>Title</td><td>URL</td></tr>
-	</thead>
-	<tbody id="PRODUCT_LIST">
-	<tr><td class="title"></td><td class="url"></td></tr>
-	</tbody>
-</ul>
-
-<table>
-	<thead>
-	<tr><td>Title</td><td>URL</td></tr>
-	</thead>
-	<tbody id="CUSTOMER_LIST">
-	<tr><td class="title"></td><td class="url"></td></tr>
-	</tbody>
-</ul>
+	<tr>
+		<td>
+			<h3>Products</h3>
+			<table class="span-8">
+				<thead>
+				<tr><td>Title</td><td>URL</td></tr>
+				</thead>
+				<tbody id="PRODUCT_LIST">
+				<tr><td class="title"></td><td class="url"></td></tr>
+				</tbody>
+			</table>
+		</td>
+		<td>
+			<h3>Customers</h3>
+			<table class="span-8">
+				<thead>
+				<tr><td>Title</td><td>URL</td></tr>
+				</thead>
+				<tbody id="CUSTOMER_LIST">
+				<tr><td class="title"></td><td class="url"></td></tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+</table>

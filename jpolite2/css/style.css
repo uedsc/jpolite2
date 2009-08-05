@@ -17,9 +17,10 @@
 /*              GLOBALS               */
 /**************************************/
 body {margin:0;padding:0;background:#eee}
-.normal, .haha {background:#eee}
-.hehe {background:#555}
-.hoho {background:#aaa}
+.normal {background:#eee}
+.darker {background:#777 url(g/actionMin.png)}
+.dark {background:#aaa url(g/actionMax.png)}
+.lighter {background:#f6f6f6}
 .left  {float:left}
 .right {float:right}
 
@@ -86,6 +87,7 @@ body {margin:0;padding:0;background:#eee}
 .orange .moduleHeader{background:#E2584E url(g/module-red.gif) repeat-x; border-color:#c94f47 #F6A7A8 #F6A7A8 #c94f47}
 .yellow .moduleHeader{background:#E2904E url(g/module-yellow.gif) repeat-x; border-color:#c98147 #F6C4A7 #F6C4A7 #c98147}
 .green .moduleHeader{background:#66B161 url(g/module-green.gif) repeat-x; border-color:#579653 #ABCFA5 #ABCFA5 #579653}
+.blue .moduleHeader{background:#4E8EE2 url(g/module-header.gif) repeat-x; }
 .white .moduleHeader{background:#9E9E9E url(g/module-white.gif) repeat-x; border-color:#888 #D9D9D9 #D9D9D9 #888}
 
 

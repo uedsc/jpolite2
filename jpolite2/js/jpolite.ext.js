@@ -269,11 +269,17 @@ function Login(){
 	});
 };
 
-function test(){
+function test1(){
 	$.handleMessage({
 		error:'too bad!',
 		msg: 'haha',
-		notice:[['name','too short']],
+		notice:[['name','too short']]
+	});
+	return false;
+};
+
+function test2(){
+	$.handleMessage({
 		resource:[
 			{name:'Products'},
 			{name:'Customers'}

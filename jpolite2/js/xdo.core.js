@@ -92,6 +92,10 @@ $.extend(XDO.prototype, {
 						for (p in y) if (y[p].type) y[p] = new XDO(y[p]);
 						break;
 				};
+				$.alert({
+					title: y.label,
+					text: 'loaded successfully!'
+				});
 			}
 		});
 		return y.loaded;

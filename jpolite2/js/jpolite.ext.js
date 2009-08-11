@@ -231,23 +231,52 @@ $(function(){
 	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
 	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
-	var customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
+	var s, customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
 	switch (customNav) {
 	case	'1':
-			$("li", "#header_tabs").css({width:'80px', padding:0, textAlign:'center'});
-			$.jpolite.Nav.init("#header_tabs", "li", $.fn.kwicks, {max:120, spacing:5, sticky:true, event:'click'});
+			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
+			$("li", "#main_nav").css({width:'80px', padding:0, textAlign:'center'});
+			s = {
+				navInit:$.fn.kwicks,
+				navInitArguments:{max:120, spacing:5, sticky:true, event:'click'}
+			};
 			break;
 	case	'2':
-			//Just a little cusomization to the appearance of tabs
-			$("li", "#header_tabs").css({background:"transparent", border:0})
-			//$("#header_tabs").prepend("<li class='backLava'></li>")
-			$.jpolite.Nav.init("#header_tabs", "li", $.fn.lavaLamp, {startItem:0, speed:800});
+			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
+			$("li", "#main_nav").css({background:"transparent", border:0})
+			s = {
+				navInit:$.fn.lavaLamp,
+				navInitArguments:{startItem:0, speed:800}
+			};
 			break;
 	default:
-			$.jpolite.Nav.init("#header_tabs", "li", TraditionalTabs);
+			s = {navInit:TraditionalTabs};
 	}
 
-	$.jpolite.init();
+	/*
+	 * 		Default initialization parameters:
+	 * 
+	 * 		cts: #main_nav,					//Navigation Tab container id
+	 * 		its: "li",						//Navigation Tab selector
+	 * 		t1: $.fn.fadeOut,				//Content transition Out callback
+	 * 		t2: $.fn.fadeIn,				//Content transition In callback
+	 * 		navInit: TraditionalTabs,		//Navigation Tab Initialization callback
+	 * 		navInitArguments: {},			//Navigation Tab Initialization parameters
+	 * 		moduleSortable: true			//Whether to allow module drag-n-drop
+	 * 		layoutPersistence: []			//Methods to load/save layout of modules
+	 */
+	s.layoutPersistence = [
+		function() {
+			return window["eval"]("(" + $.cookie('jpolite2layout') + ")")
+		},
+		function(s) {
+			return $.cookie('jpolite2layout', s);
+		}
+	];
+	$.jpolite.loadLayout = function(){
+		this._loadLayout();
+	};
+	$.jpolite.init(s);
 	$.jpolite.gotoTab('t1');	//Activate the first tab by default, or another id of your choice
 	$.alert({
 		title: 'Notification powered by Gritter',
@@ -267,23 +296,4 @@ function Login(){
 		}
 		auth_token_key = "&authenticity_token=" + encodeURIComponent(json.auto);
 	});
-};
-
-function test1(){
-	$.handleMessage({
-		error:'too bad!',
-		msg: 'haha',
-		notice:[['name','too short']]
-	});
-	return false;
-};
-
-function test2(){
-	$.handleMessage({
-		resource:[
-			{name:'Products'},
-			{name:'Customers'}
-		]
-	});
-	return false;
 };

@@ -1,14 +1,13 @@
 ﻿/*
  * Module ID & link definitions
  * Format:
- * moduleId:{url: "url_of_this_module",
+ * moduleId:{url: "url_of_this_module (relative to index.html)",
  *  		 t:   "title_for_this_module",
- *   		 c:   "optional color definition for title bar"}
  */ 
 var _modules={
-	m101:{url:"modules/m101.html",	t:"Motivation", c:"red"},
-	m102:{url:"modules/m102.html",	t:"Philisophy", c:"yellow"},
-	m103:{url:"modules/m103.html",	t:"Buzz", c:"green"},
+	m101:{url:"modules/m101.html",	t:"Motivation"},
+	m102:{url:"modules/m102.html",	t:"Philisophy"},
+	m103:{url:"modules/m103.html",	t:"Buzz"},
 
 	m200:{url:"modules/m200.html",	t:"Layout Width"},
 	m201:{url:"modules/m201.html",	t:"Module Definition"},
@@ -35,10 +34,12 @@ var _modules={
 	m504:{url:"modules/m504.html",	t:"Customize Tab Background"},
 	m505:{url:"modules/m505.html",	t:"Customize Themes"},
 	m506:{url:"modules/m506.html",	t:"Customize Features"},
+	m507:{url:"modules/m507.html",	t:"Lose Some Weight"},
 
-	m601:{url:"modules/m601.html",	t:"Message Processing"},
-
-	m700:{url:"modules/m700.html",	t:"XML Data Object"},
+	m600:{url:"modules/m600.html",	t:"XDO Features"},
+	m601:{url:"modules/m601.html",	t:"XML Data Object"},
+	m602:{url:"modules/m602.html",	t:"Message Processing"},
+	m603:{url:"modules/m603.html",	t:"Event Handling"},
 
 	m801:{url:"modules/m801.html",	t:"Resources & Credits"},
 	m802:{url:"modules/m802.html",	t:"License"}
@@ -46,38 +47,35 @@ var _modules={
 
 /*
  * Layout definitions for each tab, i.e., which modules go to which columns under which tab
- *  Format:
- *  	{id: "id_of_the_module	(refer to _modules)",
- *  	 c:  "column_id_belongs_to	(c1, c2, c3)",
- *  	 t:  "tab_id_belongs_to	(t1, t2, ...)"}
- */ 
-var _moduleLayout=[
-	{id:'m101',c:'c1',tab:'t1'},{id:'m102',c:'c2',tab:'t1'},{id:'m103',c:'c3',tab:'t1'},
+ * Format:
+ * 		tab_id: [
+ * 			...
+ * 			"{module_id}:{column_id, c1, c2, ...}:[optional color class]:[optional template name]",
+ * 			...
+ * 		]
+ */
+var _moduleLayout={
+	t1:["m101:c1:red", "m102:c2:yellow", "m103:c3:green"],
+	
+	t2:["m200:c1", "m201:c2", "m202:c3", "m203:c4"],
+	
+	t3:["m301:c1", "m302:c2::B", "m303:c3::C"],
 
-	{id:'m200',c:'c1',tab:'t2'},
-	{id:'m201',c:'c2',tab:'t2'},{id:'m202',c:'c3',tab:'t2'},{id:'m203',c:'c4',tab:'t2'},
-
-	{id:'m301',c:'c1',tab:'t3'},
-	{id:'m302',c:'c2',tab:'t3',mt:'B'},{id:'m303',c:'c3',tab:'t3',mt:'C'},
-
-	{id:'m400',c:'c1',tab:'t4'},{id:'m401',c:'c2',tab:'t4'},
-
-	{id:'m500',c:'c1',tab:'t5'},{id:'m501',c:'c2',tab:'t5'},
-
-	{id:'m601',c:'c1',tab:'t6'},
-
-	{id:'m700',c:'c1',tab:'t7'},
-
-	{id:'m801',c:'c1',tab:'t8'},
-	{id:'m802',c:'c1',tab:'t8'}
-];
+	t4:["m400:c1", "m401:c2"],
+	
+	t5:['m500:c1', 'm501:c2'],
+	
+	t6:['m600:c1', 'm601:c2'],
+	
+	t8:['m801:c1', 'm802:c1']
+};
 
 /* 
  * Column layout definitions, i.e., how the columns (containers) are placed under each tab
  * Pure CSS properties can be set upon each column, e.g., width, float, etc. You can refer
  * to jQuery.fn.css() for more details.
  * 
- * The "bg" property is used to set the background of all columns, which actually affects the <body>
+ * The "bg" property is used to set the background of all columns, which actually affects <body>
  * 
  * A _default value set is provided, to save your efforts of setting each tab manually
  */
@@ -108,8 +106,8 @@ var _columnLayout = {
 		 c2:'span-18 last',
 		 c3:'hide'
 	},
-	t6:{ c1:'span-24 last',
-		 c2:'span-24 last',
+	t6:{ c1:'span-6',
+		 c2:'span-18 last',
 		 c3:'hide'
 	},
 	t7:{ c1:'span-24 last'

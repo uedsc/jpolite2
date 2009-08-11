@@ -1,15 +1,15 @@
 <p>Secondly, define where to put all modules in <b>_moduleLayout</b> variable, e.g.,<br>
 <pre>
 ...
-{id:'m101',col:'c1',tab:'t1'},
-{id:'m102',col:'c2',tab:'t1'},
-{id:'m103',col:'c3',tab:'t1'},
+t1:["m101:c1:red:C", "m102:c2" ... ],
+t2:["m201:c1::B" ... ]
 ...
 </pre>
 
 <ul class="bullet">
-	<li><b>id</b> - the module ID</li>
-	<li><b>col</b> - short for column, defines which column this module goes to, c1, c2 or c3</li>
-	<li><b>tab</b> - which tab the module belongs to</li>
+	<li><b>t1, t2</b> - Tab ID</li>
+	<li><b>m101</b> - module ID, as defined in <b>_modules</b></li>
+	<li><b>red</b> - optional module color class, green, ...</li>	
+	<li><b>C</b> - optional module template name, </li>
 </ul>
 </p>

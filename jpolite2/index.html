@@ -3,32 +3,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>JPolite V2</title>
-<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen, projection"/>
-<link title="silver" href="css/style.css" type="text/css" rel="stylesheet" media="screen, projection"/>
-<link title="classical" href="css/style0.css" type="text/css" rel="alternative stylesheet" media="screen, projection"/>
-<!--[if IE]>
-	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen, projection"/>
-<![endif]-->
+<meta name="keywords" content="jquery,portal,lightweight,ui,javascript"/>
+<meta name="description" content="JPolite is a lightweight portal framework based on jQuery with strong customization features."/>
+<meta name="author" content="http://trilancer.wordpress.com/"/>
+<link rel="stylesheet" href="css/screen.css" type="text/css" media="screen"/>
 <link rel="stylesheet" type="text/css" href="css/gritter.css"/>
 <link rel="stylesheet" type="text/css" href="css/jqModal.css"/>
 <!-- Sample jQuery UI Theme CSS file from http://jqueryui.com/themeroller/ -->
+<link rel="alternate stylesheet" title="classic" href="css/style0.css" type="text/css" media="screen"/>
+<link rel="alternate stylesheet" title="silver" href="css/style.css" type="text/css" media="screen"/>
+<link rel="stylesheet" title="modern" href="css/style1.css" type="text/css" media="screen"/>
+<!--[if IE]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen"/>
+<![endif]-->
 <link rel="stylesheet" type="text/css" href="css/start/jquery-ui-1.7.2.custom.css" media="screen"/>
 </head>
 <body class='normal'>
 <div id="header">
 	<div id="logo"></div>
 	<div id="title">A Lightweight Portal Framework based on jQuery</div>
-	<ul id="header_tabs">
+	<ul id="main_nav">
 		<li id="t1">About V2</li>
 		<li id="t2">Layout</li>
 		<li id="t3">Module</li>
 		<li id="t4">Controls</li>
 		<li id="t5">Customize</li>
-		<li id="t6">Messaging</li>
-		<li id="t7">XDO</li>
+		<li id="t6">XDO</li>
 		<li id="t8">Download</li>
 	</ul>
-	<div id="info_bar"><div id="loading"><img src="img/loading.gif" alt="loading"/></div>
+	<div id="info_bar"><div id="loading"></div>
 		<span class="right">
 			<img id="expd" src="img/s.gif" alt="Expand All Modules"/>
 			<img id="clps" src="img/s.gif" alt="Collapse All"/>
@@ -45,7 +48,7 @@
 		<div class="module blue" id="m104:t1">
 			<div class="moduleFrame">
 				<div class='moduleHeader'>
-					<div class='moduleTitle'>SEO Support</div>
+					<div class='moduleTitle'>Key New Features</div>
 					<div class='moduleActions'>
 						<b title="Collapse" class="actionMin"></b>
 						<b title="Expand" class="actionMax"></b>
@@ -53,7 +56,24 @@
 					</div>
 				</div>
 				<div class='moduleContent'>
-					<p>Note this module a static one pre-loaded in <b>index.html</b>, which is visible to search engines.</p>
+					<h4>SEO Support</h4>
+					<p>Note this module is a static one pre-loaded in <b>index.html</b>, which is visible to search engines.</p>
+					<script>
+						function switchTheme(t) {
+							$('link[title]','head').each(function(){
+								this.disabled = true;
+								this.disabled = (this.title != t); 
+							});
+							return false;
+						};
+					</script>
+					<fieldset><legend>Theme Switcher</legend>
+						<p>
+						<button onclick="switchTheme('modern')"><img style="width:126px;height:66px" src="img/t1.png" alt="Modern"/></button>
+						<button onclick="switchTheme('silver')"><img style="width:126px;height:66px" src="img/t2.png" alt="Silver"/></button>
+						<button onclick="switchTheme('classic')"><img style="width:126px;height:66px" src="img/t3.png" alt="Classic"/></button>
+						</p>
+					</fieldset>
 				</div>
 			</div>
 		</div>
@@ -114,6 +134,7 @@ Copyright 2009 (C) Trilancer.com
 </div>
 
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
 <script type="text/javascript" src="js/modules.js"></script>
 <script type="text/javascript" src="js/jquery.gritter.js"></script>

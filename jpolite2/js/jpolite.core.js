@@ -88,13 +88,11 @@ $.fn.extend({
  * JPolite Core Features and Functions
  */
 $.jpolite = {
-	Header: $("#header"),
-	Footer: $("#footer"),
 	Nav: {
 		its: null,			//Collection of tab items
-		tabs: {},			//Hash for tabs, tabs[tab_x_id] == tab_x
+		tabs: {},			//Hash for tabs, tabs[tab_x_id] => tab_x
 		ct:	null,			//Current tab id
-		c: $("#content"),	//Content
+		cc: $("#content"),	//Content container
 		t1: $.fn.fadeOut,	//Content transition out function
 		t2: $.fn.fadeIn,	//Content transition in function
 
@@ -104,13 +102,14 @@ $.jpolite = {
 			this.its = $(its, cts).each(function(i){
 				this.modules = {};
 				t[this.id] = this;
-			}).click(function(){
-				if (!$(this).on()) return;
-				$.jpolite.Nav.switchTab(this.id);
-			})
+				$(this).click(function(){
+					if (!$(this).on()) return;
+					$.jpolite.Nav.switchTab(this.id);
+				})
+			});
 		},
 		switchTab: function(id){
-			var c = this.c,
+			var cc = this.cc,
 				x = this.tabs[id],
 				t2 = this.t2,
 				mv = $(".module:visible");
@@ -122,26 +121,26 @@ $.jpolite = {
 					$(m).show();
 					m.loadContent();
 				};
-				t2.call(c, 900)
+				t2.call(cc, 900)
 			};
 			this.ct = id;
-			this.t1.apply(c, [500, f])
+			this.t1.apply(cc, [500, f])
 		},
 		getTab: function(id) {
-			return this.tabs[id];
+			return this.tabs[id || this.ct];
 		},
-		addStaticModule: function(m, tab_id){
-			this.tabs[tab_id].modules[m.id] = m;
+		addStaticModule: function(m, tid){
+			this.tabs[tid].modules[m.id] = m;
+			m.tab = this.tabs[tid]
 		},
 		removeModule: function(m){
-			delete this.tabs[m.tab].modules[m.id];
+			delete m.tab.modules[m.id];
 		}
 	},
 	Content: {
-		_MTS: {}, 		//Module Templates
-//		c1: $("#c1"),
-//		c2: $("#c2"),
-//		c3: $("#c3"),
+		_loadLayout: function(){},	//Method to load layout
+		_saveLayout: function(){},	//Method to save layout
+		MTS: {}, 	//Module Templates
 		moduleActions: {
 			loadContent: function(url, forced) {
 				var x = this;
@@ -161,33 +160,36 @@ $.jpolite = {
 			min: function(){ $(".moduleContent", this).hide() },
 			close: function(){
 				$(this).rm();
-				$.jpolite.Nav.removeModule(this)
+				$.jpolite.Nav.removeModule(this);
+				$.jpolite.Content.saveLayout();
 			}
 		},
 
-		init: function() {
-			var x = $("#content > div").sortable({
+		init: function(moduleSortable) {
+			var x = $(".cc");
+			if (moduleSortable) x.sortable({
 				start: function(){
 					$(".cc").addClass("dragging")
 				},
-				stop:  function(){
-					$(".cc").removeClass("dragging")
+				stop:  function(e, u){
+					$(".cc").removeClass("dragging");
+					var m = u.item[0]; 
+					if (m.c) m.c = m.parentNode.id;
+					$.jpolite.Content.saveLayout();
 				},
 				connectWith: '.cc',
+				tolerance: 'intersect',
 				handle: '.moduleHeader',
 				placeholder: 'ui-sortable-placeholder',
 				revert: true
-			})//.disableSelection()
-			.get();
+			});
+			x = x.get(); 
 			for (var i in x) this[x[i].id] = $(x[i]);
 
 			x = $(".module_template").get();
 			for (i in x){
-				var id = x[i].id || '_default';
-				this._MTS[id] = $(x[i]).attr("class","module").rm();
-			};
-			this._MTS.get = function(id) {
-				return this[id] ? this[id] : this._default;
+				var id = x[i].id || 0;
+				this.MTS[id] = $(x[i]).attr("class","module").rm();
 			};
 			this.loadStatic();
 			this.loadLayout();
@@ -200,26 +202,27 @@ $.jpolite = {
 			delete x.bg;
 			for (var c in x) this[c].attr('class', 'cc ' + x[c]);
 		},
-		addModule: function(m) {
-			var c = this[m.c], t = $.jpolite.Nav.getTab(m.tab);
+		addModule: function(m, t) {
+			var c = this[m.c];
+			if (!c) return;
 
-			if (!c || !t) return;
-
-			var x = this._MTS.get(m.mt).clone(true)[0];
-			$.extend(x, this.moduleActions);
 			var y = _modules[m.id];
-			x.loaded = false;
-			x.url = y.url;
-			x.tab = m.tab;
-			x.id = m.id;
+			var x = this.MTS[m.mt || 0].clone()[0];
+			$.extend(x, {mc:'', mt:''}, this.moduleActions, m, {
+				loaded: false,
+				url: y.url,
+				tab: t
+			});
 
 			t.modules[m.id] = x;
 
 			$(".moduleTitle", x).text(y.t);
-			if (y.c) $(x).addClass(y.c);
-			c.prepend(x);
-			if (m.tab == $.jpolite.Nav.ct) $(x).show();
-			if ($(x).is(':visible')) x.loadContent();
+			if (m.mc) $(x).addClass(m.mc);
+			c.append(x);
+			if (t.id == $.jpolite.Nav.ct) {
+				$(x).show();
+				x.loadContent();
+			}
 		},
 		// Make DIV.module sections preloaded in the page active modules 
 		loadStatic: function(){
@@ -229,7 +232,7 @@ $.jpolite = {
 				$.extend(this, {
 					id: p[0],
 					tab: p[1],
-					url: _modules[p[0]],
+					//url: _modules[p[0]],
 					loaded: true
 				}, ma);
 				$.widgetize.apply(this);
@@ -238,41 +241,70 @@ $.jpolite = {
 		},
 
 		// Load layout defined in modules.js
-		loadLayout: function(url) {
-			var l = _moduleLayout.reverse();
+		loadLayout: function() {
+			var l = this._loadLayout() || _moduleLayout;
 
-			for (var x in l) this.addModule(l[x]);
+			for (var t in l) {
+				var tab = $.jpolite.Nav.getTab(t);
+				if (tab) for (var i in l[t]) {
+					var s = l[t][i].split(":");
+					this.addModule({
+						id: s[0],
+						c:	s[1],
+						mc: s[2] || '',
+						mt:	s[3] || ''
+					}, tab) 	
+				}
+			}
 		},
 		// Retrieve current layout
 		saveLayout: function() {
-			return "[" + $(".module", "#main").map(function(){
-				return "{id:'" + this.id + "',c:'" + this.parentNode.id + "',tab:'" + this.tab +"'}";
-			}).get().join(",") + "]";
+			var r = "{" + $.jpolite.Nav.its.map(function(){
+				var t = [], m = this.modules;
+				for (var i in m)
+					if (m[i].c)		//Skip static modules
+						t.push("'".concat(m[i].id, ":", m[i].c, ":", m[i].mc, ":", m[i].mt, "'"));
+				
+				return "'" + this.id + "':[" + t.toString() + "]";
+			}).get().join(",") + "}";
+			if (this._saveLayout) this._saveLayout(r);
 		}
 	},
 
-	init: function(){
-		this.Content.init();
+	init: function(options){
+		var s = $.extend({
+	 		cts: "#main_nav",
+	 		its: "li",
+	 		t1: $.fn.fadeOut,
+	 		t2: $.fn.fadeIn,
+	 		navInit: TraditionalTabs,
+	 		navInitArguments: {},
+	 		moduleSortable: true
+		}, options);
+
+		this.Nav.init(s.cts, s.its, s.navInit, s.navInitArguments);
+		this.Nav.t1 = s.t1;
+		this.Nav.t2 = s.t2;
+		if (s.layoutPersistence) {
+			this.Content._loadLayout = s.layoutPersistence[0];
+			this.Content._saveLayout = s.layoutPersistence[1];
+		}
+		this.Content.init(s.moduleSortable);
 
 		delete this.Nav.init;
+		delete this.Nav.addStaticModule;
 		delete this.Content.init;
 		delete this.Content.loadStatic;
 		delete $.jpolite.init;
 	},
 	gotoTab: function(id) {
-		var x;
-		if (id) x = this.Nav.tabs[id];
-		if (!x) x = this.Nav.its()[0];
-		$(x).click();
+		$(this.Nav.getTab(id)).click();
 	},
 	replaceModule: function(col, ids) {
 		var x = $(".module:visible", this.Content[col]).get();
+		var t = this.Nav.getTab();
 		for (var i in x) x[i].close();
-		for (i in ids)
-			this.Content.addModule({
-				id: ids[i],
-				c: col,
-				tab: this.Nav.ct
-			})
+		for (i in ids) this.Content.addModule({id: ids[i], c: col}, t);
+		this.Content.saveLayout();
 	}
 };

@@ -40,6 +40,7 @@ var _modules={
 	m601:{url:"modules/m601.html",	t:"XML Data Object"},
 	m602:{url:"modules/m602.html",	t:"Message Processing"},
 	m603:{url:"modules/m603.html",	t:"Event Handling"},
+	m604:{url:"modules/m604.html",	t:"XDO Programming Model"},
 
 	m801:{url:"modules/m801.html",	t:"Resources & Credits"},
 	m802:{url:"modules/m802.html",	t:"License"}

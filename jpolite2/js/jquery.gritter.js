@@ -10,7 +10,6 @@
  */
 
 jQuery(document).ready(function($){
- 	
  	/********************************************
 	 * First, we'll define our object
 	 */
@@ -222,49 +221,47 @@ jQuery(document).ready(function($){
 			}
 	 
 		}
-	    
-	}
+	};
 	
 	/********************************************
 	 * Now lets turn it into some jQuery Magic!
 	 */
 	
 	// Set it up as an object
-	$.gritter = {};
-	
+	$.gritter = {
 	// Add a gritter notification
-	$.gritter.add = function(params){
-
-		try {
-			if(!params.title || !params.text){
-				throw "Missing_Fields"; 
+		add: function(params){
+	
+			try {
+				if(!params.title || !params.text){
+					throw "Missing_Fields"; 
+				}
+			} catch(e) {
+				if(e == "Missing_Fields"){
+					alert('Gritter Error: You need to fill out the first 2 params: "title" and "text"');
+				}
 			}
-		} catch(e) {
-			if(e == "Missing_Fields"){
-				alert('Gritter Error: You need to fill out the first 2 params: "title" and "text"');
-			}
+			
+			var id = Gritter.add(
+				params.title,
+				params.text,
+				params.image || '',
+				params.sticky || false,
+				params.time || ''
+			);
+			
+			return id;
+	
+		},
+	
+		// Remove a specific notification
+		remove: function(id, params){
+			Gritter.removeSpecific(id, params || '');
+		},
+	
+		// Remove all gritter notifications
+		removeAll: function(){
+			Gritter.stop();
 		}
-		
-		var id = Gritter.add(
-			params.title,
-			params.text,
-			params.image || '',
-			params.sticky || false,
-			params.time || ''
-		);
-		
-		return id;
-
-	}
-	
-	// Remove a specific notification
-	$.gritter.remove = function(id, params){
-		Gritter.removeSpecific(id, params || '');
-	}
-	
-	// Remove all gritter notifications
-	$.gritter.removeAll = function(){
-		Gritter.stop();
-	}
-	
+	};
 });

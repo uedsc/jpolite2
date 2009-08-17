@@ -21,7 +21,7 @@
 
 .jqmWindow h3 {background:#000; color:#fff; margin: 0 -12px; height:20px}
 
-.jqmClose {float:right; display:block; width:20px; height:20px; background:url("../images/close.png")}
+.jqmClose {float:right; display:block; width:20px; height:20px; background:url("g/close.png")}
 .jqmClose:hover {background-position:0 -20px}
 
 .jqmOverlay {background-color: #000}

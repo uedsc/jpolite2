@@ -243,7 +243,7 @@ $(function(){
 			break;
 	case	'2':
 			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
-			$("li", "#main_nav").css({background:"transparent", border:0})
+			$("li", "#main_nav").css({background:"transparent", border:0});
 			s = {
 				navInit:$.fn.lavaLamp,
 				navInitArguments:{startItem:0, speed:800}

@@ -67,8 +67,10 @@ body {margin:0;padding:0;background:#eee}
 .ui-sortable-placeholder { margin:10px 0; border: 1px dotted #f00; background:#faa; visibility: visible !important; height: 20px !important}
 
 /* Module Components */
-.module {background:#fff; margin-bottom:10px; border:1px solid #ddd; display:none;  -moz-box-shadow: 0pt 0pt 1em #bbb}
+.module {background:#fff; margin-bottom:10px; border:1px solid #ddd; display:none; -moz-box-shadow:0pt 0pt 1em #bbb}
 .module:hover {border-color: #bbb}
+.max {float:none !important; width:100% !important}
+.min {display:none}
 .moduleFrame {border:0; overflow:hidden;}
 .moduleHeader {margin:10px; padding:2px; background:#888; color:#fff; cursor:move; overflow:hidden;
 				border-width:1px; border-style:solid; border-color: #777 #eee #eee #777}

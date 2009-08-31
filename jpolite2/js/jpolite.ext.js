@@ -97,6 +97,10 @@ function myLiveEvents(){
 	$(".actionClose").live("mousedown", function(){
 		$(this).parents(".module")[0].close();	
 	});
+	$(".moduleTitle").live("dblclick", function(){
+		$(this).parents(".cc").toggleClass("max").siblings(".cc").toggleClass("min");
+	});
+
 	$("a.tab").live("click", function(){
 		$.jpolite.gotoTab(this.rel);
 		return false;
@@ -104,7 +108,7 @@ function myLiveEvents(){
 	$("a.local").live("click", function(){
 		$(this).parents(".module")[0].loadContent(this.href, true);
 		return false;	
-	});	
+	});
 };
 
 /*
@@ -273,9 +277,9 @@ $(function(){
 			return $.cookie('jpolite2layout', s);
 		}
 	];
-	$.jpolite.loadLayout = function(){
-		this._loadLayout();
-	};
+//	$.jpolite.loadLayout = function(){
+//		this._loadLayout();
+//	};
 	$.jpolite.init(s);
 	$.jpolite.gotoTab('t1');	//Activate the first tab by default, or another id of your choice
 	$.alert({

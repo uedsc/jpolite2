@@ -69,6 +69,8 @@ body {margin:0;padding:100px 0 0;padding-bottom:5em; background:#7ba0d3 url(new/
 /* Module Components */
 .module {background:#fff; margin-bottom:10px; display:none; -moz-box-shadow: 0pt 0pt 1em #333; -moz-border-radius:6px;}
 .module:hover {border-color: #999}
+.max {float:none !important; width:100% !important}
+.min {display:none}
 .moduleFrame {border:0px solid #4E8EE2; overflow:hidden;}
 .moduleHeader {background:#4E8EE2 url(g/module-header.gif) repeat-x; padding:2px; border-bottom:1px solid #777; cursor:move; overflow:hidden; -moz-border-radius:6px 6px 0 0}
 .moduleTitle {background:url(g/icon.gif) no-repeat; height:1.4em; line-height:1.4em; float:left; padding-left:18px; font-weight:bold; font-size:1.2em; color:#fff}

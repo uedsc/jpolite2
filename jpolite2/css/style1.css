@@ -30,14 +30,15 @@ body {margin:0;padding:100px 0 0;padding-bottom:5em; background:#7ba0d3 url(new/
 #header {background:url(new/nav-bg.png) repeat-x; position:fixed; left:0; top:0; width:100%; z-index:9999}
 #logo {background:url(g/logo.png) no-repeat; position:absolute; left:50%; top:-3px; margin-left:-620px; width:122px; height:50px}
 #title {display:none; padding-left:160px; color:#fff; font-size:1.5em; height:50px; line-height:50px; font-weight:bold; font-style:italic}
-#loading {display:none;width:16px;height:16px;background:url(../img/loading1.gif)}
 
 #info_bar {width:910px; margin:0 auto;clear:left; color:#aaa; background: url(new/infobar-bg.png); padding:10px 20px; overflow:hidden; height:30px}
-#info_bar span img {cursor:pointer}
-#info_bar .hint {display:none;padding-right:5px}
+#info_bar .hint {display:none;padding:0 5px;line-height:16px}
 #info_bar:hover .hint {display:inline}
-#expd {background:url(g/expandAll.png);width:17px;height:16px;display:none}
-#clps {background:url(g/collapseAll.png);width:17px;height:16px}
+#info_bar b {cursor:pointer;display:block;width:16px;height:16px;float:left}
+#menu_btn {cursor:pointer;float:left;background:url(g/icon.gif)}
+#loading {visibility:hidden;background:url(../img/loading1.gif);margin-right:4px}
+#maxAll {background:url(g/expandAll.png)}
+#minAll {background:url(g/collapseAll.png)}
 
 
 /**************************************/

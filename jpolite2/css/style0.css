@@ -30,14 +30,15 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 #header {background:#0e4cbc url(g/header.png) repeat-x}
 #logo {background:url(g/logo.png) no-repeat; position:absolute; left:20px; top:10px; width:132px; height:50px}
 #title {padding-left:160px; color:#fff; font-size:1.5em; height:50px; line-height:50px; font-weight:bold; font-style:italic}
-#loading {display:none;float:left;width:16px;height:16px;background:url(../img/loading.gif)}
 
 #info_bar {clear:left; color:#aaa; background-color:#fefefe; border-bottom:1px solid #bbb; padding:4px 6px; overflow:hidden; height:1.2em}
-#info_bar span img {cursor:pointer}
-#info_bar .hint {display:none;padding-right:5px}
+#info_bar .hint {display:none;padding:0 5px;line-height:16px}
 #info_bar:hover .hint {display:inline}
-#expd {background:url(g/expandAll.png);width:17px;height:16px;display:none}
-#clps {background:url(g/collapseAll.png);width:17px;height:16px}
+#info_bar b {cursor:pointer;display:block;width:16px;height:16px;float:left}
+#menu_btn {cursor:pointer;float:left;background:url(g/icon.gif)}
+#loading {visibility:hidden;background:url(../img/loading1.gif);margin-right:4px}
+#maxAll {background:url(g/expandAll.png)}
+#minAll {background:url(g/collapseAll.png)}
 
 
 /**************************************/

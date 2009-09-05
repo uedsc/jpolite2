@@ -156,8 +156,14 @@ $.jpolite = {
 					x.loaded = true;
 				});
 			},
-			max: function(){ $(".moduleContent", this).show() },
-			min: function(){ $(".moduleContent", this).hide() },
+			max: function(){
+				$(".moduleContent,.actionMin", this).show();
+				$(".actionMax",this).hide();
+			},
+			min: function(){
+				$(".moduleContent,.actionMin", this).hide();
+				$(".actionMax",this).show();
+			},
 			close: function(){
 				$(this).rm();
 				$.jpolite.Nav.removeModule(this);
@@ -205,6 +211,12 @@ $.jpolite = {
 		addModule: function(m, t) {
 			var c = this[m.c];
 			if (!c) return;
+			
+			//Check for duplicate module, and refuse
+			if (t.modules[m.id]) {
+				$(t.modules[m.id]).fadeTo(200,0.5).fadeTo(200,1)
+				return;
+			};
 
 			var y = _modules[m.id];
 			var x = this.MTS[m.mt || 0].clone()[0];
@@ -299,6 +311,9 @@ $.jpolite = {
 	},
 	gotoTab: function(id) {
 		$(this.Nav.getTab(id)).click();
+	},
+	addModule: function(m) {
+		this.Content.addModule(m, this.Nav.getTab());
 	},
 	replaceModule: function(col, ids) {
 		var x = $(".module:visible", this.Content[col]).get();

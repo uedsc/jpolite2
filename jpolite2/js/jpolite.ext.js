@@ -123,9 +123,9 @@ function myCustomEvents(){
 
 	//Ajax Start & Stop event processor registered with jQuery's methods
 	$("#loading").ajaxStart(function(){
-	   $(this).show();
+	   $(this).css("visibility","visible");
 	}).ajaxStop(function(){
-	   $(this).hide();
+	   $(this).css("visibility","hidden");
 	})
 };
 
@@ -223,6 +223,28 @@ function TraditionalTabs(){
 };
 
 /*
+ * Load a module menu on the fly and enable the menu button actions, you can choose to load
+ * a dynamic menu or use a different trigger
+ */
+function loadModuleMenu() {
+	$('#module_menu').jqm().load("menu.html", function(){
+		//Initialize module menu action
+		$("a",this).click(function(){
+			var s = this.rev.split(":");
+			$.jpolite.addModule({
+				id: s[0],
+				c:	s[1] || 'c1',	//Add to c1 of current tab by default
+				mc: s[2] || '',
+				mt:	s[3] || ''
+			});
+		})
+	});
+	$('#menu_btn').click(function(){
+		$('#module_menu').jqmShow();
+	});
+};
+
+/*
  * Initialization Code
  */
 $(function(){
@@ -231,11 +253,12 @@ $(function(){
 	myCustomEvents();
 	myMessageHandlers();
 	myControls();
+	loadModuleMenu()
 
 	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
 	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
-	var s, customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
+	var s, customNav = 1;//prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
 	switch (customNav) {
 	case	'1':
 			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
@@ -282,6 +305,15 @@ $(function(){
 //	};
 	$.jpolite.init(s);
 	$.jpolite.gotoTab('t1');	//Activate the first tab by default, or another id of your choice
+	
+	$("#maxAll").click(function(){
+		var x = $(".module:visible").get();
+		for (i in x) x[i].max();
+	});
+	$("#minAll").click(function(){
+		var x = $(".module:visible").get();
+		for (i in x) x[i].min();
+	});
 	$.alert({
 		title: 'Notification powered by Gritter',
 		text: 'JPolite is up!'

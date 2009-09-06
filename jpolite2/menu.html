@@ -1,8 +1,10 @@
 <style>
-#module_menu dl{float:left;margin-right:10px}
+#module_menu dl{float:left;padding-right:4px; margin-right:5px; border-right:1px solid #ddd}
+#module_menu dl.last{border:0}
 #module_menu a{cursor:pointer}
 #module_menu a:hover{padding:0 4px;background:#a00;color:#eee;text-decoration:none}
 </style>
+
 <h3>:: Modules Menu ::</h3>
 
 <dl class="span-5">
@@ -14,6 +16,7 @@
 			<li><a rev="m103">Buzz</a></li>
 		</ul>
 	</dd>
+	<hr/>
 	<dt>Layout</dt>
 	<dd>
 		<ul>
@@ -23,6 +26,7 @@
 			<li><a rev="m203">Column Layout Definition</a></li>
 		</ul>
 	</dd>
+	<hr/>
 	<dt>Module</dt>
 	<dd>
 		<ul>
@@ -45,6 +49,7 @@
 			<li><a rev="m407">jQuery UI with Theme Support</a></li>
 		</ul>
 	</dd>
+	<hr/>
 	<dt>Customize</dt>
 	<dd>
 		<ul>
@@ -58,7 +63,7 @@
 		</ul>
 	</dd>
 </dl>
-<dl class="span-4">
+<dl class="span-4 last">
 	<dt>XDO</dt>
 	<dd>
 		<ul>
@@ -68,6 +73,7 @@
 			<li><a rev="m604">XDO Programming Model</a></li>
 		</ul>
 	</dd>
+	<hr/>
 	<dt>Download</dt>
 	<dd>
 		<ul>
@@ -77,6 +83,6 @@
 	</dd>
 </dl>
 
-<div class="notice clear">A new module will be appended to the first column at a menu item click.<br/>
-Note: a same module is allowed only ONCE per tab. 
-</div>
+<div class="success clear">A new module will be appended to the first column at a menu item click.
+Customize this menu in <b>menu.html</b></div>
+<div class="notice">Note: a same module is allowed only ONCE per tab</div>

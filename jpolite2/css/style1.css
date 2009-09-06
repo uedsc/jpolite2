@@ -52,6 +52,7 @@ body {margin:0;padding:100px 0 0;padding-bottom:5em; background:#7ba0d3 url(new/
 #main_nav li.on {color:#ddd; background:#333 url(new/tabon.png) repeat-x; height:43px; margin:0 -1px; border-left:1px solid #222; border-right:1px solid #666}
 #main_nav li.on .hover {color:#e33}
 #main_nav li.backLava {background:#f2a04E; position:absolute; width:0; z-index:1; border:0}
+#main_nav li span:after {content:url(g/arrow-down.png)}
 #main_nav li dl {display:none; background:#777; width:200px; color:#eee}
 #main_nav li dd {text-align:left; padding:0 5px}
 #main_nav li dd.on {border:1px solid #f73}

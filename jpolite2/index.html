@@ -24,11 +24,11 @@
 	<div id="title">A Lightweight Portal Framework based on jQuery</div>
 	<ul id="main_nav">
 		<li id="t1"><b class="hover">About V2</b>About V2</li>
-		<li id="t2"><b class="hover">Layout</b>Layout<dl><dd id="t21">Same content, another layout</dd></dl></li>
+		<li id="t2"><b class="hover">Layout</b><span>Layout</span><dl><dd id="t21">Same content, another layout</dd></dl></li>
 		<li id="t3"><b class="hover">Module</b>Module</li>
-		<li id="t4"><b class="hover">Controls</b>Controls<dl><dd id="t41">Tabs &amp; Accordion</dd><dd id="t42">jQuery UI with Theme</dd></dl></li>
+		<li id="t4"><b class="hover">Controls</b><span>Controls</span><dl><dd id="t41">Tabs &amp; Accordion</dd><dd id="t42">jQuery UI with Theme</dd></dl></li>
 		<li id="t5"><b class="hover">Customize</b>Customize</li>
-		<li id="t6"><b class="hover">XDO</b>XDO<dl><dd id="t61">Programming Model</dd></dl></li>
+		<li id="t6"><b class="hover">XDO</b><span>XDO</span><dl><dd id="t61">Programming Model</dd></dl></li>
 		<li id="t8"><b class="hover">Download</b>Download</li>
 	</ul>
 	<div id="info_bar">
@@ -60,7 +60,7 @@
 				<div class='moduleContent'>
 					<h4>SEO Support</h4>
 					<p>Note this module is a static one pre-loaded in <b>index.html</b>, which is visible to search engines.</p>
-					<script>
+					<script type="text/javascript">
 						function switchTheme(t) {
 							$('link[title]','head').each(function(){
 								this.disabled = true;
@@ -76,10 +76,18 @@
 						<button onclick="switchTheme('classic')"><img style="width:126px;height:66px" src="img/t3.png" alt="Classic"/></button>
 						</p>
 					</fieldset>
-					<h4>Layout Persistence</h4>
-					<p>Module layout can be stored and retrieved to your selected store. Any drag-n-drop operation will trigger save layout.</p>
-					<button onclick="$.cookie('jpolite2layout',null)">Reset Layout</button>
-					<p class="clear">To resume the original layout, press above button then refresh.</p>
+					<div class="span-11">
+						<h4>Layout Persistence</h4>
+						<p>Module layout can be stored and retrieved to your selected store.</p>
+						<button onclick="$.cookie('jpolite2layout',null)">Reset Layout</button>
+						<p class="clear">Any drag-n-drop operation will trigger save layout. To resume the original layout, press above button then refresh.</p>						
+					</div>
+					<div class="span-11 last">
+						<h4>Popup &amp; Dropdown Menu</h4>
+						<p>A module popup menu is provided for users to add modules to current tab.</p>
+						<button onclick="$('#menu_btn').click()">Show Module Menu</button>
+						<p class="clear">Dropdown menu is now supported which provides additional navigation support in addition to horizontal tabs.</p>						
+					</div>
 				</div>
 			</div>
 		</div>

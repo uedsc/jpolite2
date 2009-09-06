@@ -36,7 +36,7 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 #info_bar:hover .hint {display:inline}
 #info_bar b {cursor:pointer;display:block;width:16px;height:16px;float:left}
 #menu_btn {cursor:pointer;float:left;background:url(g/icon.gif)}
-#loading {visibility:hidden;background:url(../img/loading1.gif);margin-right:4px}
+#loading {visibility:hidden;background:url(../img/loading.gif);margin-right:4px}
 #maxAll {background:url(g/expandAll.png)}
 #minAll {background:url(g/collapseAll.png)}
 
@@ -53,6 +53,7 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 #main_nav li.on {color:#09f; background:#f8f8f8 url(g/tabon.gif) repeat-x;}
 #main_nav li.on .hover {color:#e33}
 #main_nav li.backLava {background:#f2a04E; position:absolute; width:0; z-index:1; border:0}
+#main_nav li span:after {content:url(g/expandAll.png); margin-top:1em}
 #main_nav li dl {display:none; background:#fff; border:1px solid #777; width:200px; color:#555}
 #main_nav li dd {text-align:left; padding:0 5px}
 #main_nav li dd.on {border:1px solid #37f}

@@ -45,15 +45,20 @@ body {margin:0;padding:0;background:#eee}
 /*             NAVIGATION             */
 /**************************************/
 /* JPolite Native Navigation Tab */
-#main_nav {list-style-type:none; overflow:hidden; margin:0 0 0 160px; position:relative}
-#main_nav li {float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#333;
-				padding:0 1em; border-right:1px dotted #ccc; margin:0;
-				cursor:pointer; white-space:nowrap; position:relative; z-index:9}
-#main_nav .hover {opacity:0; filter:alpha(opacity=0); display:block; background:url(g/tabon.gif) repeat-x; position:absolute; left:0; right:0; width:100%; height:100%; text-align:center; margin:0;color:#333}
+#main_nav {list-style-type:none; margin:0 0 0 160px; position:relative; height:25px}
+#main_nav li {overflow:visible;float:left; width:5em; text-align:center; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#333;
+				padding:0 1em; border-right:1px dotted #ccc;
+				margin:0; cursor:pointer; white-space:nowrap; position:relative; z-index:9}
+#main_nav .hover {opacity:0; filter:alpha(opacity=0); display:block; background:url(g/tabon.gif) repeat-x; position:absolute; left:0; top:0; width:100%; height:100%; text-align:center; margin:0;color:#333}
 #main_nav li.on {color:#c23;}
 #main_nav li.on .hover {color:#e33}
 #main_nav li:hover {color:#e33}
 #main_nav li.backLava {background:#f2a04E; padding:0; position:absolute; z-index:1; border:0}
+#main_nav li dl {display:none; background:#777; width:200px; color:#eee; margin-left:-1em}
+#main_nav li dd {text-align:left; padding:0 5px}
+#main_nav li dd.on {border:1px solid #f73}
+#main_nav li dd:hover {background:#555; text-align:left; padding:0 5px}
+#main_nav li:hover dl {display:block}
 /**************************************/
 /*            MAIN CONTENT            */
 /**************************************/

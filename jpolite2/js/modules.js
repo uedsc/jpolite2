@@ -59,14 +59,18 @@ var _moduleLayout={
 	t1:["m101:c1:red", "m102:c2:yellow", "m103:c3:green"],
 	
 	t2:["m200:c1", "m201:c2", "m202:c3", "m203:c4"],
+	t21:["m200:c1", "m201:c2", "m202:c2", "m203:c2"],
 	
 	t3:["m301:c1", "m302:c2::B", "m303:c3::C"],
 
 	t4:["m400:c1", "m401:c2"],
+	t41:["m401:c1", "m402:c2"],
+	t42:["m407:c1"],
 	
 	t5:['m500:c1', 'm501:c2'],
 	
 	t6:['m600:c1', 'm601:c2'],
+	t61:['m604:c1'],
 	
 	t8:['m801:c1', 'm802:c1']
 };
@@ -93,6 +97,10 @@ var _columnLayout = {
 		 c3:'span-8',
 		 c4:'span-8 last'
 	},
+	t21:{ bg:'darker',
+		 c1:'span-4',
+		 c2:'span-20 last'
+	},
 	t3:{ bg:'dark',
 		 c1:'span-24',
 		 c2:'span-12',
@@ -103,6 +111,11 @@ var _columnLayout = {
 		 c2:'span-18 last',
 		 c3:'hide'
 	},
+	t41:{ c1:'span-12',
+		  c2:'span-12 last'
+	},
+	t42:{ c1:'span-24 last'
+	},
 	t5:{ c1:'span-6',
 		 c2:'span-18 last',
 		 c3:'hide'
@@ -110,6 +123,8 @@ var _columnLayout = {
 	t6:{ c1:'span-6',
 		 c2:'span-18 last',
 		 c3:'hide'
+	},
+	t61:{ c1:'span-24 last'
 	},
 	t7:{ c1:'span-24 last'
 	},

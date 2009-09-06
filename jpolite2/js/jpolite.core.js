@@ -99,13 +99,18 @@ $.jpolite = {
 		init: function(cts, its, func, p){
 			var t = this.tabs;
 			func.call($(cts), p);
-			this.its = $(its, cts).each(function(i){
+			this.its = $(its, cts).each(function(){
 				this.modules = {};
 				t[this.id] = this;
-				$(this).click(function(){
-					if (!$(this).on()) return;
-					$.jpolite.Nav.switchTab(this.id);
-				})
+				$(this).click(function(e){
+					if (!$(this).on() && !$(".on",this).length) return false;
+					if (e.originalEvent || $(".on",this).length == 0) {
+						$.jpolite.Nav.switchTab(this.id);
+						$(".on", $.jpolite.Nav.its).not(this).not($(this).parents()).removeClass("on");
+					}
+					$(this.parentNode).click();
+					return false;
+				});
 			});
 		},
 		switchTab: function(id){

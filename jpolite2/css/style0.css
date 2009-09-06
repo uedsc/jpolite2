@@ -45,14 +45,20 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 /*             NAVIGATION             */
 /**************************************/
 /* JPolite Native Navigation Tab */
-#main_nav {list-style-type:none; overflow:hidden; margin:0 0 0 160px; position:relative}
-#main_nav li {width:9em; text-align:center; float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#eee;
+#main_nav {list-style-type:none; margin:0 0 0 160px; position:relative; height:2em}
+#main_nav li {overflow:visible; width:9em; text-align:center; float:left; font-size:1.2em; font-weight:bold; height:2em; line-height:2em; color:#eee;
 				background:#6ae url(g/header.png) 0 -8px; border-width:1px 1px 0 1px; border-style:solid; border-color:#acf #05b #000 #acf;
 				margin:0 3px; cursor:pointer; white-space:nowrap; position:relative; z-index:9}
-#main_nav .hover {opacity:0; filter:alpha(opacity=0); display:block; background:url(g/tabon.gif) repeat-x; position:absolute; left:0; right:0; width:100%; height:100%; text-align:center; margin:0;color:#333}
-#main_nav li.on {color:#07e; background:#f8f8f8 url(g/tabon.gif) repeat-x;}
+#main_nav .hover {opacity:0; filter:alpha(opacity=0); display:block; background:url(g/tabon.gif) repeat-x; position:absolute; left:0; top:0; width:100%; height:100%; text-align:center; margin:0;color:#333}
+#main_nav li.on {color:#09f; background:#f8f8f8 url(g/tabon.gif) repeat-x;}
 #main_nav li.on .hover {color:#e33}
 #main_nav li.backLava {background:#f2a04E; position:absolute; width:0; z-index:1; border:0}
+#main_nav li dl {display:none; background:#fff; border:1px solid #777; width:200px; color:#555}
+#main_nav li dd {text-align:left; padding:0 5px}
+#main_nav li dd.on {border:1px solid #37f}
+#main_nav li dd:hover {background:#555; color:#eee; text-align:left; padding:0 5px}
+#main_nav li:hover dl {display:block}
+
 /**************************************/
 /*            MAIN CONTENT            */
 /**************************************/

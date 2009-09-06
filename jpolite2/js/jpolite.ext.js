@@ -97,7 +97,7 @@ function myLiveEvents(){
 	$(".actionClose").live("mousedown", function(){
 		$(this).parents(".module")[0].close();	
 	});
-	$(".moduleTitle").live("dblclick", function(){
+	$(".moduleHeader").live("dblclick", function(){
 		$(this).parents(".cc").toggleClass("max").siblings(".cc").toggleClass("min");
 	});
 
@@ -214,7 +214,7 @@ function myControls(){
  */
 function TraditionalTabs(){
 	this.children("li").each(function(){
-		$("<b class='hover'></b>").text(this.innerHTML).prependTo(this);
+		//$("<b class='hover'></b>").text(this.innerHTML).prependTo(this);
 		$(this).hover(
 			function(){$(".hover", this).stop().animate({opacity:.9},700, 'easeOutSine')},
 			function(){$(".hover", this).stop().animate({opacity:0},700,  'easeOutExpo')}
@@ -258,7 +258,7 @@ $(function(){
 	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
 	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
-	var s, customNav = 1;//prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
+	var s, customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
 	switch (customNav) {
 	case	'1':
 			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
@@ -292,6 +292,7 @@ $(function(){
 	 * 		moduleSortable: true			//Whether to allow module drag-n-drop
 	 * 		layoutPersistence: []			//Methods to load/save layout of modules
 	 */
+	s.its = "li, dd"
 	s.layoutPersistence = [
 		function() {
 			return window["eval"]("(" + $.cookie('jpolite2layout') + ")")

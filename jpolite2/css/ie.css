@@ -20,4 +20,3 @@ a abbr, a acronym { text-decoration: underline; } /* IE 7 bug */
 fieldset legend { margin: 0; } /* IE 6 disappearing legend bug */
 
 .gritter-item { border-left:1px solid #000 } /* Mysterious Bug in IE7 */
-#header_tabs .hover {margin-top:-5px}

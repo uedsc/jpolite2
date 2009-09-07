@@ -57,6 +57,7 @@ body {margin:0;padding:0;background:#ddd;padding-bottom:5em}
 #main_nav li dl {display:none; background:#fff; border:1px solid #777; width:200px; color:#555}
 #main_nav li dd {text-align:left; padding:0 5px}
 #main_nav li dd.on {border:1px solid #37f}
+#main_nav li dd.on:before {content:"»  "}
 #main_nav li dd:hover {background:#555; color:#eee; text-align:left; padding:0 5px}
 #main_nav li:hover dl {display:block}
 

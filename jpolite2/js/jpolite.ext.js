@@ -258,17 +258,17 @@ $(function(){
 	//Here you can see how to customize the look & feel of the navigation tabs
 	//Details about Kwicks can be found here: http://plugins.jquery.com/project/kwicks
 	//Demos about lavaLamp can be found here: http://nixbox.com/demos/jquery-lavalamp.php
-	var s, customNav = prompt("Pick your favorite Navigation Tab style:\n1 - Kwicks; 2 - LavaLamp; 3 - 'Traditional'", "1");
+	var s, customNav = window.name;	//Read Nav Tab style set in index.html
 	switch (customNav) {
-	case	'1':
+	case	'1':	//Kwicks
 			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
-			$("li", "#main_nav").css({width:'80px', padding:0, textAlign:'center'});
+			$("li", "#main_nav").css({width:'90px', padding:0, textAlign:'center'});
 			s = {
 				navInit:$.fn.kwicks,
-				navInitArguments:{max:120, spacing:5, sticky:true, event:'click'}
+				navInitArguments:{max:130, spacing:5, sticky:true, event:'click'}
 			};
 			break;
-	case	'2':
+	case	'2':	//LavaLamp
 			//A little cusomization to the appearance of tabs, for production system, set it in CSS instead
 			$("li", "#main_nav").css({background:"transparent", border:0});
 			s = {
@@ -276,7 +276,7 @@ $(function(){
 				navInitArguments:{startItem:0, speed:800}
 			};
 			break;
-	default:
+	default://3 or else - Traditional
 			s = {navInit:TraditionalTabs};
 	}
 

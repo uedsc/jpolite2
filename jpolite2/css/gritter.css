@@ -9,7 +9,7 @@
 	padding-bottom:0;
 }
 * html .gritter-bottom {
-	margin-bottom:-11px;
+	margin-bottom:0;
 }
 * html .gritter-close {
 	background:url(g/gritter-close-ie6.gif);
@@ -22,7 +22,7 @@
 /* the norm */
 #gritter-notice-wrapper {
 	position:fixed;
-	top:120px;
+	top:20px;
 	right:20px;
 	width:301px;
 	z-index:9999;
@@ -32,36 +32,30 @@
 	margin:0 0 10px 0;
 }
 .gritter-top {
-	background-image:url(g/gritter-top.png);
-	background-repeat:no-repeat;
-	background-position:top left;
+	background:url(g/gritter.png) no-repeat left -30px;
 	height:10px;
 }
 .hover .gritter-top {
-	background-position:top right;
+	background-position:right -30px;
 }
 .gritter-bottom {
-	background-image:url(g/gritter-bottom.png);
-	background-repeat:no-repeat;
-	background-position:top left;
+	background:url(g/gritter.png) no-repeat left bottom;
 	height:8px;
 	margin:0;
 }
 .hover .gritter-bottom {
-	background-position: top right;
+	background-position: bottom right;
 }
 .gritter-item {
 	display:block;
-	background-image:url(g/gritter-bg-tile.png);
-	background-repeat:repeat-y;
-	background-position:top left;
+	background:url(g/gritter.png) no-repeat left -40px;
 	color:#eee;
 	padding:2px 11px 8px 11px;
 	font-size: 11px;
 	font-family:verdana;
 }
 .hover .gritter-item {
-	background-position:top right;
+	background-position:right -40px;
 }
 .gritter-item p {
 	padding:0;
@@ -71,7 +65,7 @@
 	position:absolute;
 	top:5px;
 	left:3px;
-	background:url(g/gritter-close.png);
+	background:url(g/gritter.png) no-repeat left top;
 	cursor:pointer;
 	width:30px;
 	height:30px;

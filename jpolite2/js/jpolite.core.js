@@ -15,17 +15,18 @@ $.extend({
 		this.extend(this._widgetControls, options);
 	},
 	widgetize: function() {
+		//Make external links open in new window
 		$("a[href^=http]", this).attr("target", "_blank");
 		for (s in $._widgetControls) {
-			var f = $._widgetControls[s][0],
-				p = $._widgetControls[s][1];
+			var f = $._widgetControls[s][0],	//Function
+				p = $._widgetControls[s][1];	//Associated Parameters
 
 			if ($.isArray(p)) f.apply($(s, this), p);
 			else f.call($(s, this), p);
 		}
 	},
 
-	//A message regitry and handling system to handle server side messages
+	//A message registry and handling system to handle server side messages
 	//Can be used for local messaging as well
 	_MsgRegistry: {
 		//find out what the target: header, tab#id, helper, container#id, module#id

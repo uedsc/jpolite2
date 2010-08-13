@@ -76,6 +76,30 @@ $.fn.extend({
 				$.jpolite.replaceModule('c2', m)
 			})
 		})
+	},
+
+	// Apply on FORM.ajaxform1, replace Form's parent DIV.moduleContent with response from Ajax submit
+	AjaxForm1: function() {
+		return this.each(function(){
+			var x = this;
+			var result = $(this).parents(".moduleContent");
+			$(x).submit(function(){
+				$.post(x.action, $(x).serialize(), function(data){result.html(data);$.widgetize.apply(result[0])});
+				return false;
+			});
+		});
+	},
+
+	//Apply on FORM.ajaxform2, replace Form > div.result with response from Ajax submit
+	AjaxForm2: function() {
+		return this.each(function(){
+			var x = this;
+			var result = $(".result",this);
+			$(x).submit(function(){
+				$.post(x.action, $(x).serialize(), function(data){result.html(data);$.widgetize.apply(result[0])});
+				return false;
+			});
+		});
 	}
 });
 
@@ -180,6 +204,8 @@ function myControls(){
 		".maccordion":	[$.fn.MAccordion],
 		".jsonform":	[$.fn.JsonForm],
 		".menu":		[$.fn.SideMenu],
+		".ajaxform1":	[$.fn.AjaxForm1],
+		".ajaxform2":	[$.fn.AjaxForm2],
 
 		//jqModal controls, One object as arguement
 		".jqmWindow":	[$.fn.jqm, {toTop:true}],

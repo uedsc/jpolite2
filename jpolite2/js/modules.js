@@ -26,6 +26,7 @@ var _modules={
 	m405:{url:"modules/m405.html",	t:"How to integrate jQuery UI Plugins"},
 	m406:{url:"modules/m406.html",	t:"Example: jqModal"},
 	m407:{url:"modules/m407.html",	t:"jQuery UI Controls with Theme Support"},
+	m408:{url:"modules/m408.html",	t:"Ajax Form Examples"},
 	
 	m500:{url:"modules/m500.html",	t:"Customization Guide"},
 	m501:{url:"modules/m501.html",	t:"Customize Navigation Tabs"},

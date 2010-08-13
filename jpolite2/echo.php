@@ -1,0 +1,1 @@
+<pre><?php echo $_POST["FirstName"] ?> <?php echo $_POST["LastName"] ?></pre>
